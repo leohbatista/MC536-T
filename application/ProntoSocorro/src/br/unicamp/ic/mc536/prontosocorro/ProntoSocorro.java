@@ -15,7 +15,8 @@ public class ProntoSocorro {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        TelaInicial l = new TelaInicial();
+        l.setVisible(true);
     }
     
 }
