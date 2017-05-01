@@ -6,4 +6,6 @@
 - 158343	Pedro Luis Marques Sliuzas
 - 171985	Leonardo Henrique Batista
 
-**ATENÇÃO:** O projeto JAVA na pasta application foi criado no NetBeans 8.2 e, dessa forma, evite editá-lo em outra versão até a entrega seja feita, de forma a evitar possíveis erros de compatibilidade.
+**ATENÇÃO:**
+O projeto JAVA na pasta application foi criado no NetBeans 8.2 
+Dessa forma, evite editá-lo em outra versão até a entrega seja feita, de forma a evitar possíveis erros de compatibilidade.
