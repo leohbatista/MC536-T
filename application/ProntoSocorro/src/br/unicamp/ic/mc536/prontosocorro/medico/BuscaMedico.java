@@ -7,6 +7,9 @@
 package br.unicamp.ic.mc536.prontosocorro.medico;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -301,7 +304,8 @@ public class BuscaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimparMouseClicked
 
     private void btInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btInserirMouseClicked
-        
+        InsereMedico insere = new InsereMedico();
+        insere.setVisible(true);
     }//GEN-LAST:event_btInserirMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -313,11 +317,42 @@ public class BuscaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarMouseClicked
 
     private void btRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRemoverMouseClicked
-        // TODO add your handling code here:
+        int crm;
+        if(tabela.getSelectedRowCount() != 0){
+            crm = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(),0).toString());
+            if((JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?","Confirmação",JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE)) == JOptionPane.YES_OPTION){
+                Medico m = new Medico(crm,"","");
+                m.excluir();
+                if (Medico.verificaExclusao(crm)){
+                    lbErro.setText("");
+                    JOptionPane.showMessageDialog(this, "Excluído com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
+                    btBuscarMouseClicked(evt);
+                } else {
+                    lbErro.setText("Erro ao excluir!");
+                } 
+            }
+        } else {
+            lbErro.setText("Selecione uma linha para excluir!");
+        }
     }//GEN-LAST:event_btRemoverMouseClicked
 
     private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
-        // TODO add your handling code here:
+         if(tabela.getSelectedRowCount() != 0){
+            int crm = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(),0).toString());
+            ResultSet rs = Medico.consultar(""+crm,(short)1);
+            try {
+                lbErro.setText("");
+                rs.next();
+                Medico medico = new Medico(crm, rs.getString("nome"), rs.getString("especialidade"));
+                InsereMedico alt = new InsereMedico(medico);
+                alt.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(BuscaMedico.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        } else {
+            lbErro.setText("Selecione uma linha para alterar");
+        }
     }//GEN-LAST:event_btAlterarMouseClicked
 
     /**

@@ -35,17 +35,28 @@ public class Medico {
 
     public boolean novo() {               
         String query;        
-        query = "";      
+        query = "INSERT INTO medico (CRM, nome, especialidade) VALUES ("
+                + this.CRM + ",'" + this.nome + "','" + this.especialidade + "');";      
         
         return d.insere(query);
     }
     
-     public boolean alterar() {
+    public boolean alterar() {
         String query;       
-        query = "";               
+        query = "UPDATE medico SET "
+                + "nome='" + this.nome + "',"
+                + "especialidade='" + this.especialidade + "'"
+                + " WHERE crm=" + this.CRM + ";";
      
         return d.atualiza(query); 
-    }   
+    }  
+    
+    public boolean excluir() {
+        String query;       
+        query = "DELETE FROM medico WHERE crm="+this.CRM+";";               
+     
+        return d.remove(query); 
+    }
 
     public static ResultSet consultar(String valor, short campo) {
         String query;
@@ -109,7 +120,15 @@ public class Medico {
         this.especialidade = especialidade;
     }
     
- 
+    public static boolean verificaExclusao(int crm){
+        ResultSet rs = consultar(crm+"",(short)1);
+        try {
+            return !rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(Medico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;       
+    }
     
 
 }
