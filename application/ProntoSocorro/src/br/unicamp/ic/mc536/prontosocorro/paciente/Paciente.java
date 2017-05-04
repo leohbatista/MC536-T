@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-package br.unicamp.ic.mc536.prontosocorro.medico;
+package br.unicamp.ic.mc536.prontosocorro.paciente;
 
 import br.unicamp.ic.mc536.prontosocorro.Database;
 import java.sql.ResultSet;
@@ -17,21 +17,24 @@ import java.util.logging.Logger;
  *
  * @author Administrador
  */
-public class Medico {
+public class Paciente {
     
-    private int CRM;
+    private int CPF;
     private String nome;
-    private String especialidade;
+    private String endereco;
+    private String telefone;
    
     private Database d;
 
-    public Medico(int CRM, String nome, String especialidade) {
-        this.CRM = CRM;
+    public Paciente(int CPF, String nome, String endereco, String telefone) {
+        this.CPF = CPF;
         this.nome = nome;
-        this.especialidade = especialidade;
-        d = new Database();
-        d.conecta();   
+        this.endereco = endereco;
+        this.telefone = telefone;
+        d.conecta();
     }
+
+    /*
 
     public boolean novo() {               
         String query;        
@@ -91,17 +94,17 @@ public class Medico {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(Medico.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }*/
+
+    public int getCPF() {
+        return CPF;
     }
 
-    public int getCRM() {
-        return CRM;
-    }
-
-    public void setCRM(int CRM) {
-        this.CRM = CRM;
+    public void setCPF(int CPF) {
+        this.CPF = CPF;
     }
 
     public String getNome() {
@@ -112,23 +115,32 @@ public class Medico {
         this.nome = nome;
     }
 
-    public String getEspecialidade() {
-        return especialidade;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     
-    public static boolean verificaExclusao(int crm){
+    /*public static boolean verificaExclusao(int crm){
         ResultSet rs = consultar(crm+"",(short)1);
         try {
             return !rs.next();
         } catch (SQLException ex) {
-            Logger.getLogger(Medico.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;       
-    }
+    }*/
     
 
 }

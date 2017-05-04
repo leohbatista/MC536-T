@@ -59,6 +59,8 @@ public class InsereMedico extends javax.swing.JFrame {
         lbErro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Médicos");
+        setName("janela"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -87,15 +89,15 @@ public class InsereMedico extends javax.swing.JFrame {
 
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edNome);
-        edNome.setBounds(130, 110, 260, 23);
+        edNome.setBounds(130, 110, 260, 25);
 
         edCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edCRM);
-        edCRM.setBounds(130, 80, 140, 23);
+        edCRM.setBounds(130, 80, 140, 25);
 
         edEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edEspecialidade);
-        edEspecialidade.setBounds(130, 140, 260, 23);
+        edEspecialidade.setBounds(130, 140, 260, 25);
 
         btConfirma.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btConfirma.setText("CONFIRMA");
@@ -148,7 +150,7 @@ public class InsereMedico extends javax.swing.JFrame {
                 lbErro.setText("Preencha os campos obrigatórios");
             } else {  
                 Medico medico = new Medico(CRM, nome, especialidade);
-                if (flagUpdate) {
+                if (!flagUpdate) {
                     medico.novo();
                     JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
                 } else {

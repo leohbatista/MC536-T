@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS paciente (
 
 CREATE TABLE IF NOT EXISTS medicamento (
     id_medicamento INT NOT NULL AUTO_INCREMENT,
-    principio_ativo VARCHAR(80) NOT NULL,
+    principio_ativo VARCHAR(200) NOT NULL,
     dosagem VARCHAR(30) NOT NULL,
     contra_indicacao TEXT NULL,
     PRIMARY KEY (id_medicamento)
