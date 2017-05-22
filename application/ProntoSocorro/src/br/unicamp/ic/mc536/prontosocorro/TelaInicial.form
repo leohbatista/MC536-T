@@ -84,7 +84,7 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico4">
+        <Menu class="javax.swing.JMenu" name="mConsulta4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consulta"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
