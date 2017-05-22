@@ -36,7 +36,7 @@ public class TelaInicial extends javax.swing.JFrame {
         mSistema = new javax.swing.JMenu();
         opFechar = new javax.swing.JMenuItem();
         mMedico = new javax.swing.JMenu();
-        mMedico1 = new javax.swing.JMenu();
+        Paciente = new javax.swing.JMenu();
         mConsulta4 = new javax.swing.JMenu();
         mMedico5 = new javax.swing.JMenu();
         mMedico2 = new javax.swing.JMenu();
@@ -95,12 +95,12 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menu.add(mMedico);
 
-        mMedico1.setText("Paciente");
-        mMedico1.setAutoscrolls(true);
-        mMedico1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mMedico1.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mMedico1.setName("mMedico"); // NOI18N
-        menu.add(mMedico1);
+        Paciente.setText("Paciente");
+        Paciente.setAutoscrolls(true);
+        Paciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Paciente.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        Paciente.setName("mMedico"); // NOI18N
+        menu.add(Paciente);
 
         mConsulta4.setText("Consulta");
         mConsulta4.setAutoscrolls(true);
@@ -194,11 +194,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Paciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu mConsulta4;
     private javax.swing.JMenu mMedico;
-    private javax.swing.JMenu mMedico1;
     private javax.swing.JMenu mMedico2;
     private javax.swing.JMenu mMedico5;
     private javax.swing.JMenu mMedico6;

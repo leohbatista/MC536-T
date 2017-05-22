@@ -71,7 +71,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedicoMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico1">
+        <Menu class="javax.swing.JMenu" name="Paciente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Paciente"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
