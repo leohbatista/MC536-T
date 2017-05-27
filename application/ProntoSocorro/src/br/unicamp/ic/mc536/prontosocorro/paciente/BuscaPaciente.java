@@ -29,41 +29,41 @@ public class BuscaPaciente extends javax.swing.JFrame {
     
     private void search() {
         if (chSemFiltro.isSelected()){
-            atualizaTabela(Medico.consultar("",(short)-1));
+            atualizaTabela(Paciente.consultar("",(short)-1));
             lbErro.setText("");
-        } else if(chCRM.isSelected()) {
+        } else if(chCPF.isSelected()) {
             try {
-                int crm = Integer.parseInt(edCRM.getText());
-                atualizaTabela(Medico.consultar(""+crm,(short)1));
+                String cpf =edCPF.getText();
+                atualizaTabela(Paciente.consultar(edCPF.getText(),(short)1));
                 lbErro.setText("");
             } catch (NumberFormatException e) {
                 lbErro.setText("O código deve ser um valor numérico!");
             }
         } else if(chNome.isSelected()) {
-            atualizaTabela(Medico.consultar(edNome.getText(),(short)2));
+            atualizaTabela(Paciente.consultar(edNome.getText(),(short)2));
             lbErro.setText("");
-        } else if(chEspecialidade.isSelected()) {
-            atualizaTabela(Medico.consultar(edEspecialidade.getText(),(short)3));
-            lbErro.setText("");
-        }
+        } 
     }
     
     protected void atualizaTabela(ResultSet rs){
         DefaultTableModel modelotabela = (DefaultTableModel) tabela.getModel();
-        modelotabela.setColumnCount(3);
+        modelotabela.setColumnCount(4);
         modelotabela.setRowCount(0);
 
-        tabela.getColumnModel().getColumn(0).setHeaderValue("CRM");
+        tabela.getColumnModel().getColumn(0).setHeaderValue("CPF");
         tabela.getColumnModel().getColumn(1).setHeaderValue("Nome");
-        tabela.getColumnModel().getColumn(2).setHeaderValue("Especialidade");
+        tabela.getColumnModel().getColumn(2).setHeaderValue("Endereço");
+        tabela.getColumnModel().getColumn(3).setHeaderValue("Telefone");
+        
         int linha = 0;
         try{
             if(rs != null) {  
                 while(rs.next()){
                       modelotabela.addRow(new String[modelotabela.getColumnCount()]);
-                      modelotabela.setValueAt(rs.getString("crm"), linha, 0);
+                      modelotabela.setValueAt(rs.getString("cpf"), linha, 0);
                       modelotabela.setValueAt(rs.getString("nome"), linha, 1);
-                      modelotabela.setValueAt(rs.getString("especialidade"), linha, 2);
+                      modelotabela.setValueAt(rs.getString("endereco"), linha, 2);
+                      modelotabela.setValueAt(rs.getString("telefone"), linha, 3);
                       linha++;
                   }
             }
@@ -86,14 +86,12 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        edCRM = new javax.swing.JTextField();
+        edCPF = new javax.swing.JTextField();
         edNome = new javax.swing.JTextField();
-        edEspecialidade = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
         chSemFiltro = new javax.swing.JCheckBox();
         chNome = new javax.swing.JCheckBox();
-        chEspecialidade = new javax.swing.JCheckBox();
-        chCRM = new javax.swing.JCheckBox();
+        chCPF = new javax.swing.JCheckBox();
         btLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -104,7 +102,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
         btAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Busca de Médicos");
+        setTitle("Busca de Paciente");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -130,20 +128,15 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jPanel6.add(jLabel6);
         jLabel6.setBounds(40, 10, 140, 20);
 
-        edCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        edCRM.setEnabled(false);
-        jPanel6.add(edCRM);
-        edCRM.setBounds(120, 40, 100, 25);
+        edCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edCPF.setEnabled(false);
+        jPanel6.add(edCPF);
+        edCPF.setBounds(120, 40, 100, 23);
 
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edNome.setEnabled(false);
         jPanel6.add(edNome);
-        edNome.setBounds(120, 70, 280, 25);
-
-        edEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        edEspecialidade.setEnabled(false);
-        jPanel6.add(edEspecialidade);
-        edEspecialidade.setBounds(120, 100, 280, 25);
+        edNome.setBounds(120, 70, 280, 23);
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btBuscar.setText("BUSCAR");
@@ -160,7 +153,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
         chSemFiltro.setSelected(true);
         chSemFiltro.setText("Sem Filtro");
         jPanel6.add(chSemFiltro);
-        chSemFiltro.setBounds(315, 40, 97, 30);
+        chSemFiltro.setBounds(315, 40, 95, 30);
 
         buttonGroup1.add(chNome);
         chNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -171,29 +164,18 @@ public class BuscaPaciente extends javax.swing.JFrame {
             }
         });
         jPanel6.add(chNome);
-        chNome.setBounds(10, 70, 70, 24);
+        chNome.setBounds(10, 70, 70, 25);
 
-        buttonGroup1.add(chEspecialidade);
-        chEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chEspecialidade.setText("Especialidade");
-        chEspecialidade.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(chCPF);
+        chCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chCPF.setText("CPF");
+        chCPF.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chEspecialidadeItemStateChanged(evt);
+                chCPFItemStateChanged(evt);
             }
         });
-        jPanel6.add(chEspecialidade);
-        chEspecialidade.setBounds(10, 100, 110, 24);
-
-        buttonGroup1.add(chCRM);
-        chCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chCRM.setText("CRM");
-        chCRM.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chCRMItemStateChanged(evt);
-            }
-        });
-        jPanel6.add(chCRM);
-        chCRM.setBounds(10, 40, 70, 24);
+        jPanel6.add(chCPF);
+        chCPF.setBounds(10, 40, 70, 25);
 
         btLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btLimpar.setText("Limpar");
@@ -217,7 +199,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 4"
+                "Title 4", "Título 2"
             }
         ));
         tabela.setIntercellSpacing(new java.awt.Dimension(2, 2));
@@ -239,6 +221,11 @@ public class BuscaPaciente extends javax.swing.JFrame {
         btInserir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btInserirMouseClicked(evt);
+            }
+        });
+        btInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInserirActionPerformed(evt);
             }
         });
         jPanel5.add(btInserir);
@@ -289,24 +276,19 @@ public class BuscaPaciente extends javax.swing.JFrame {
         edNome.setEnabled(chNome.isSelected());
     }//GEN-LAST:event_chNomeItemStateChanged
 
-    private void chEspecialidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chEspecialidadeItemStateChanged
-        edEspecialidade.setEnabled(chEspecialidade.isSelected());
-    }//GEN-LAST:event_chEspecialidadeItemStateChanged
-
-    private void chCRMItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCRMItemStateChanged
-        edCRM.setEnabled(chCRM.isSelected());
-    }//GEN-LAST:event_chCRMItemStateChanged
+    private void chCPFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCPFItemStateChanged
+        edCPF.setEnabled(chCPF.isSelected());
+    }//GEN-LAST:event_chCPFItemStateChanged
  
     private void btLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLimparMouseClicked
-        edCRM.setText("");
+        edCPF.setText("");
         edNome.setText("");
-        edEspecialidade.setText("");
         chSemFiltro.setSelected(true);
         btBuscarMouseClicked(evt);
     }//GEN-LAST:event_btLimparMouseClicked
 
     private void btInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btInserirMouseClicked
-        InsereMedico insere = new InsereMedico();
+        InserePaciente insere = new InserePaciente();
         insere.setVisible(true);
     }//GEN-LAST:event_btInserirMouseClicked
 
@@ -319,14 +301,14 @@ public class BuscaPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarMouseClicked
 
     private void btRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRemoverMouseClicked
-        int crm;
+        String cpf;
         if(tabela.getSelectedRowCount() != 0){
-            crm = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(),0).toString());
+            cpf = tabela.getValueAt(tabela.getSelectedRow(),0).toString();
             if((JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?","Confirmação",JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE)) == JOptionPane.YES_OPTION){
-                Medico m = new Medico(crm,"","");
-                m.excluir();
-                if (Medico.verificaExclusao(crm)){
+                Paciente p = new Paciente(cpf,"","","");
+                p.excluir();
+                if (Paciente.verificaExclusao(cpf)){
                     lbErro.setText("");
                     JOptionPane.showMessageDialog(this, "Excluído com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
                     btBuscarMouseClicked(evt);
@@ -341,13 +323,13 @@ public class BuscaPaciente extends javax.swing.JFrame {
 
     private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
          if(tabela.getSelectedRowCount() != 0){
-            int crm = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(),0).toString());
-            ResultSet rs = Medico.consultar(""+crm,(short)1);
+            String cpf = tabela.getValueAt(tabela.getSelectedRow(),0).toString();
+            ResultSet rs = Paciente.consultar(""+cpf,(short)1);
             try {
                 lbErro.setText("");
                 rs.next();
-                Medico medico = new Medico(crm, rs.getString("nome"), rs.getString("especialidade"));
-                InsereMedico alt = new InsereMedico(medico);
+                Paciente paciente = new Paciente(cpf, rs.getString("nome"), rs.getString("endereco"),rs.getString("telefone"));
+                InserePaciente alt = new InserePaciente(paciente);
                 alt.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(BuscaPaciente.class.getName()).log(Level.SEVERE, null, ex);
@@ -356,6 +338,10 @@ public class BuscaPaciente extends javax.swing.JFrame {
             lbErro.setText("Selecione uma linha para alterar");
         }
     }//GEN-LAST:event_btAlterarMouseClicked
+
+    private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,12 +386,10 @@ public class BuscaPaciente extends javax.swing.JFrame {
     private javax.swing.JButton btRemover;
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JCheckBox chCRM;
-    private javax.swing.JCheckBox chEspecialidade;
+    private javax.swing.JCheckBox chCPF;
     private javax.swing.JCheckBox chNome;
     private javax.swing.JCheckBox chSemFiltro;
-    private javax.swing.JTextField edCRM;
-    private javax.swing.JTextField edEspecialidade;
+    private javax.swing.JTextField edCPF;
     private javax.swing.JTextField edNome;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

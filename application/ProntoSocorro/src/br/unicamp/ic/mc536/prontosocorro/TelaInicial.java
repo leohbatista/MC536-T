@@ -7,6 +7,7 @@
 package br.unicamp.ic.mc536.prontosocorro;
 
 import br.unicamp.ic.mc536.prontosocorro.medico.BuscaMedico;
+import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
 
 /**
  *
@@ -100,6 +101,11 @@ public class TelaInicial extends javax.swing.JFrame {
         Paciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Paciente.setMargin(new java.awt.Insets(5, 5, 5, 10));
         Paciente.setName("mMedico"); // NOI18N
+        Paciente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PacienteMouseClicked(evt);
+            }
+        });
         menu.add(Paciente);
 
         mConsulta4.setText("Consulta");
@@ -155,6 +161,11 @@ public class TelaInicial extends javax.swing.JFrame {
         BuscaMedico medico = new BuscaMedico();
         medico.setVisible(true);
     }//GEN-LAST:event_mMedicoMouseClicked
+
+    private void PacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PacienteMouseClicked
+        BuscaPaciente paciente = new BuscaPaciente();
+        paciente.setVisible(true);
+    }//GEN-LAST:event_PacienteMouseClicked
 
     /**
      * @param args the command line arguments

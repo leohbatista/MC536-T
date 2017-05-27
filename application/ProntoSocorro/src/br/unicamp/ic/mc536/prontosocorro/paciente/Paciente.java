@@ -19,44 +19,46 @@ import java.util.logging.Logger;
  */
 public class Paciente {
     
-    private int CPF;
+    private String CPF;
     private String nome;
     private String endereco;
     private String telefone;
    
     private Database d;
 
-    public Paciente(int CPF, String nome, String endereco, String telefone) {
+    public Paciente(String CPF, String nome, String endereco, String telefone) {
         this.CPF = CPF;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
+        d = new Database();
         d.conecta();
     }
 
-    /*
+   
 
     public boolean novo() {               
         String query;        
-        query = "INSERT INTO medico (CRM, nome, especialidade) VALUES ("
-                + this.CRM + ",'" + this.nome + "','" + this.especialidade + "');";      
+        query = "INSERT INTO paciente (cpf, nome, endereco, telefone) VALUES ("
+                + this.CPF + ",'" + this.nome + "','" + this.endereco + "','" + this.telefone + "');";      
         
         return d.insere(query);
     }
     
     public boolean alterar() {
         String query;       
-        query = "UPDATE medico SET "
+        query = "UPDATE paciente SET "
+                + "cpf='" + this.CPF + "',"
                 + "nome='" + this.nome + "',"
-                + "especialidade='" + this.especialidade + "'"
-                + " WHERE crm=" + this.CRM + ";";
+                + "endereco='" + this.endereco + "',"
+                + "telefone='" + this.telefone + "';";
      
         return d.atualiza(query); 
     }  
     
     public boolean excluir() {
         String query;       
-        query = "DELETE FROM medico WHERE crm="+this.CRM+";";               
+        query = "DELETE FROM paciente WHERE cpf='" + this.CPF + "';";               
      
         return d.remove(query); 
     }
@@ -64,17 +66,14 @@ public class Paciente {
     public static ResultSet consultar(String valor, short campo) {
         String query;
         switch(campo){
-            case 1:     // O filtro é o campo CRM
-                query= "SELECT * FROM medico WHERE crm = " + valor + ";";
+            case 1:     // o filtro é o CPF
+                query= "SELECT * FROM paciente WHERE cpf LIKE '" + valor + "%';";
                 break;
             case 2:     // O filtro é o campo Nome
-                query= "SELECT * FROM medico WHERE nome LIKE '" + valor + "%';";
-                break;
-            case 3:     // O filtro é o campo Especialidade
-                query= "SELECT * FROM medico WHERE especialidade LIKE '" + valor + "%';";
+                query= "SELECT * FROM paciente WHERE nome LIKE '" + valor + "%';";
                 break;
             default: 
-                query = "SELECT * FROM medico;";
+                query = "SELECT * FROM paciente;";
                 break;
         }
             
@@ -83,10 +82,10 @@ public class Paciente {
         return d.consulta(query);
     }    
     
-    public static boolean verificaCRM(String CRM){
+    public static boolean verificaCPF(String CPF){
         Database d = new Database();
         d.conecta();
-        ResultSet rs = d.consulta("SELECT count(*) AS n FROM medico WHERE crm='" + CRM +"';");
+        ResultSet rs = d.consulta("SELECT count(*) AS n FROM paciente WHERE cpf='" + CPF +"';");
         try {
             rs.next();
             if(rs.getInt(1) > 0){
@@ -97,13 +96,13 @@ public class Paciente {
             Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-    }*/
+    }
 
-    public int getCPF() {
+    public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(int CPF) {
+    public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
@@ -132,15 +131,15 @@ public class Paciente {
     }
 
     
-    /*public static boolean verificaExclusao(int crm){
-        ResultSet rs = consultar(crm+"",(short)1);
+    public static boolean verificaExclusao(String cpf){
+        ResultSet rs = consultar(cpf+"",(short)1);
         try {
             return !rs.next();
         } catch (SQLException ex) {
             Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;       
-    }*/
+    }
     
 
 }
