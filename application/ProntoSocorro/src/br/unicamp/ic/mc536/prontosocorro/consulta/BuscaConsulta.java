@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 
-package br.unicamp.ic.mc536.prontosocorro.medico;
+package br.unicamp.ic.mc536.prontosocorro.consulta;
+import br.unicamp.ic.mc536.prontosocorro.medico.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,12 +18,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Administrador
  */
-public class BuscaMedico extends javax.swing.JFrame {
+public class BuscaConsulta extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsFuncionario
      */
-    public BuscaMedico() {
+    public BuscaConsulta() {
         initComponents();
     }
     
@@ -117,9 +118,9 @@ public class BuscaMedico extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Busca de Médicos");
+        jLabel5.setText("Busca de Consultas");
         jPanel5.add(jLabel5);
-        jLabel5.setBounds(0, 20, 570, 30);
+        jLabel5.setBounds(0, 20, 850, 30);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel6.setLayout(null);
@@ -132,17 +133,17 @@ public class BuscaMedico extends javax.swing.JFrame {
         edCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edCRM.setEnabled(false);
         jPanel6.add(edCRM);
-        edCRM.setBounds(120, 40, 100, 27);
+        edCRM.setBounds(120, 40, 100, 25);
 
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edNome.setEnabled(false);
         jPanel6.add(edNome);
-        edNome.setBounds(120, 70, 280, 27);
+        edNome.setBounds(120, 70, 280, 25);
 
         edEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edEspecialidade.setEnabled(false);
         jPanel6.add(edEspecialidade);
-        edEspecialidade.setBounds(120, 100, 280, 27);
+        edEspecialidade.setBounds(120, 100, 280, 25);
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btBuscar.setText("BUSCAR");
@@ -152,14 +153,14 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel6.add(btBuscar);
-        btBuscar.setBounds(420, 80, 100, 50);
+        btBuscar.setBounds(700, 80, 100, 50);
 
         buttonGroup1.add(chSemFiltro);
         chSemFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         chSemFiltro.setSelected(true);
         chSemFiltro.setText("Sem Filtro");
         jPanel6.add(chSemFiltro);
-        chSemFiltro.setBounds(315, 40, 103, 30);
+        chSemFiltro.setBounds(590, 40, 97, 30);
 
         buttonGroup1.add(chNome);
         chNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -170,7 +171,7 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel6.add(chNome);
-        chNome.setBounds(10, 70, 70, 23);
+        chNome.setBounds(10, 70, 70, 24);
 
         buttonGroup1.add(chEspecialidade);
         chEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -181,7 +182,7 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel6.add(chEspecialidade);
-        chEspecialidade.setBounds(10, 100, 110, 23);
+        chEspecialidade.setBounds(10, 100, 110, 24);
 
         buttonGroup1.add(chCRM);
         chCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -197,7 +198,7 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel6.add(chCRM);
-        chCRM.setBounds(10, 40, 70, 23);
+        chCRM.setBounds(10, 40, 70, 24);
 
         btLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btLimpar.setText("Limpar");
@@ -209,10 +210,10 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel6.add(btLimpar);
-        btLimpar.setBounds(420, 40, 100, 30);
+        btLimpar.setBounds(700, 40, 100, 30);
 
         jPanel5.add(jPanel6);
-        jPanel6.setBounds(20, 60, 530, 140);
+        jPanel6.setBounds(20, 60, 810, 180);
 
         tabela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,14 +228,14 @@ public class BuscaMedico extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabela);
 
         jPanel5.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 210, 530, 320);
+        jScrollPane1.setBounds(20, 250, 810, 350);
 
         lbErro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbErro.setForeground(new java.awt.Color(255, 0, 51));
         lbErro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbErro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel5.add(lbErro);
-        lbErro.setBounds(20, 540, 350, 30);
+        lbErro.setBounds(20, 610, 350, 30);
 
         btInserir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btInserir.setText("INSERIR");
@@ -245,7 +246,7 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btInserir);
-        btInserir.setBounds(20, 580, 110, 40);
+        btInserir.setBounds(20, 650, 110, 40);
 
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
@@ -255,7 +256,7 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btVoltar);
-        btVoltar.setBounds(450, 580, 100, 40);
+        btVoltar.setBounds(730, 650, 100, 40);
 
         btRemover.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btRemover.setText("REMOVER");
@@ -265,7 +266,7 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btRemover);
-        btRemover.setBounds(260, 580, 110, 40);
+        btRemover.setBounds(260, 650, 110, 40);
 
         btAlterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btAlterar.setText("ALTERAR");
@@ -275,12 +276,12 @@ public class BuscaMedico extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btAlterar);
-        btAlterar.setBounds(140, 580, 110, 40);
+        btAlterar.setBounds(140, 650, 110, 40);
 
         getContentPane().add(jPanel5);
-        jPanel5.setBounds(0, 0, 570, 630);
+        jPanel5.setBounds(0, 0, 850, 700);
 
-        setSize(new java.awt.Dimension(585, 669));
+        setSize(new java.awt.Dimension(864, 743));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -353,7 +354,7 @@ public class BuscaMedico extends javax.swing.JFrame {
                 InsereMedico alt = new InsereMedico(medico);
                 alt.setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(BuscaMedico.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BuscaConsulta.class.getName()).log(Level.SEVERE, null, ex);
             }   
         } else {
             lbErro.setText("Selecione uma linha para alterar");
@@ -381,8 +382,10 @@ public class BuscaMedico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscaMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
@@ -391,7 +394,7 @@ public class BuscaMedico extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new BuscaMedico().setVisible(true);
+            new BuscaConsulta().setVisible(true);
         });
     }
     

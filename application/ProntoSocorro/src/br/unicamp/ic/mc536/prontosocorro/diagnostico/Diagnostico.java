@@ -4,10 +4,7 @@ package br.unicamp.ic.mc536.prontosocorro.diagnostico;
 import br.unicamp.ic.mc536.prontosocorro.Database;
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -50,7 +47,8 @@ public class Diagnostico {
                 query = "SELECT * FROM diagnostico WHERE doenca LIKE '" + valor1 + "%';";
                 break;
             case 2:     // O filtro é o medico e paciente
-                query = "SELECT * FROM diagnostico WHERE paciente ='" + valor1 + "' AND medico=" + valor2 + ";";
+                query = "SELECT * FROM diagnostico WHERE paciente='" + valor1 + "'"
+                        + " AND medico=" + valor2 + ";";
                 break;
             default: 
                 query = "SELECT * FROM diagnostico;";

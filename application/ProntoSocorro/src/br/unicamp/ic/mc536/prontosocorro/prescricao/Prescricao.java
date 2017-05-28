@@ -24,18 +24,15 @@ public class Prescricao {
    private String CPF;
    private Date data;
    private Time hora;
-   private String doenca;
    private int medicamento;
    private String posologia;
    
     private Database d;
 
-    public Prescricao(int CRM, String CPF, Date data, Time hora, String doenca, int medicamento, String posologia) {
+    public Prescricao(int CRM, String CPF, Date data, Time hora, int medicamento, String posologia) {
         this.CRM = CRM;
         this.CPF = CPF;
         this.data = data;
-        this.hora = hora;
-        this.doenca = doenca;
         this.medicamento = medicamento;
         this.posologia = posologia;
         d = new Database();
@@ -44,7 +41,7 @@ public class Prescricao {
 
     public boolean novo() {               
         String query;        
-        query = "INSERT INTO medicamento (medico, paciente, data, hora, doenca) VALUES ("
+        query = "INSERT INTO medicamento (medico, paciente, data, hora) VALUES ("
                 + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.doenca + "','" + this.medicamento +"','" + this.posologia +"');";      
         
         return d.insere(query);
@@ -70,6 +67,54 @@ public class Prescricao {
         d.conecta();
         return d.consulta(query);
     }    
+
+    public int getCRM() {
+        return CRM;
+    }
+
+    public void setCRM(int CRM) {
+        this.CRM = CRM;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
+    }
+
+    public int getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(int medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    public String getPosologia() {
+        return posologia;
+    }
+
+    public void setPosologia(String posologia) {
+        this.posologia = posologia;
+    }
     
     
     
