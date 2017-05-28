@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS exame (
 
 CREATE TABLE IF NOT EXISTS prescricao (
     medico INT NOT NULL,
-    paciente VARCHAR(45) NOT NULL,
+    paciente VARCHAR(11) NOT NULL,
     data DATE NOT NULL,
     hora TIME NOT NULL,
     medicamento INT NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS prescricao (
 
 CREATE TABLE IF NOT EXISTS diagnostico (
     medico INT NOT NULL,
-    paciente VARCHAR(45) NOT NULL,
+    paciente VARCHAR(11) NOT NULL,
     data DATE NOT NULL,
     hora TIME NOT NULL,
     doenca VARCHAR(5) NOT NULL,
