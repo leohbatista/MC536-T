@@ -33,6 +33,7 @@ public class Prescricao {
         this.CRM = CRM;
         this.CPF = CPF;
         this.data = data;
+        this.hora = hora;
         this.medicamento = medicamento;
         this.posologia = posologia;
         d = new Database();
@@ -41,8 +42,8 @@ public class Prescricao {
 
     public boolean novo() {               
         String query;        
-        query = "INSERT INTO medicamento (medico, paciente, data, hora) VALUES ("
-                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.doenca + "','" + this.medicamento +"','" + this.posologia +"');";      
+        query = "INSERT INTO prescricao (medico, paciente, data, hora, medicamento,posologia) VALUES ("
+                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.medicamento +"','" + this.posologia +"');";      
         
         return d.insere(query);
     }
@@ -53,7 +54,7 @@ public class Prescricao {
         String query;
         switch(campo){
             case 1:     // O filtro é a medicamento
-                query = "SELECT * FROM prescricao WHERE medicamento LIKE '" + valor1 + "%';";
+                query = "SELECT * FROM prescricao WHERE medicamento" + valor1 + ";";
                 break;
             case 2:     // O filtro é o medico e paciente
                 query = "SELECT * FROM prescricao WHERE paciente ='" + valor1 + "' AND medico=" + valor2 + ";";

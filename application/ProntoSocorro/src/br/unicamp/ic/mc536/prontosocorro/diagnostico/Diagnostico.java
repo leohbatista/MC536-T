@@ -32,7 +32,7 @@ public class Diagnostico {
 
     public boolean novo() {               
         String query;        
-        query = "INSERT INTO medicamento (medico, paciente, data, hora, doenca) VALUES ("
+        query = "INSERT INTO diagnostico (medico, paciente, data, hora, doenca) VALUES ("
                 + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.doenca +"');";      
         
         return d.insere(query);
