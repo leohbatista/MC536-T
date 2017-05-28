@@ -99,7 +99,7 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Busca de Médicos");
+        setTitle("Busca de Medicamentos");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {

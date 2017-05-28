@@ -60,7 +60,7 @@ public class InsereMedicamento extends javax.swing.JFrame {
         edDosagem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de Médicos");
+        setTitle("Cadastro de Medicamentos");
         setName("janela"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(null);

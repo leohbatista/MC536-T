@@ -178,17 +178,17 @@ public class TelaInicial extends javax.swing.JFrame {
         paciente.setVisible(true);
     }//GEN-LAST:event_PacienteMouseClicked
 
-<<<<<<< HEAD
+
     private void mMedico2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMedico2MouseClicked
          BuscaMedicamento medicamento = new BuscaMedicamento();
          medicamento.setVisible(true);
     }//GEN-LAST:event_mMedico2MouseClicked
-=======
+
     private void DoencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoencaMouseClicked
         BuscaDoenca doenca = new BuscaDoenca();
         doenca.setVisible(true);
     }//GEN-LAST:event_DoencaMouseClicked
->>>>>>> bcd85d8e5cb1dbf369ee852fa6010dd3664a0fdd
+
 
     /**
      * @param args the command line arguments
