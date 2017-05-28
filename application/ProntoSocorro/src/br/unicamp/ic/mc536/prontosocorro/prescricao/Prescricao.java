@@ -24,18 +24,16 @@ public class Prescricao {
    private String CPF;
    private Date data;
    private Time hora;
-   private String doenca;
    private int medicamento;
    private String posologia;
    
     private Database d;
 
-    public Prescricao(int CRM, String CPF, Date data, Time hora, String doenca, int medicamento, String posologia) {
+    public Prescricao(int CRM, String CPF, Date data, Time hora, int medicamento, String posologia) {
         this.CRM = CRM;
         this.CPF = CPF;
         this.data = data;
         this.hora = hora;
-        this.doenca = doenca;
         this.medicamento = medicamento;
         this.posologia = posologia;
         d = new Database();
@@ -44,8 +42,8 @@ public class Prescricao {
 
     public boolean novo() {               
         String query;        
-        query = "INSERT INTO medicamento (medico, paciente, data, hora, doenca) VALUES ("
-                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.doenca + "','" + this.medicamento +"','" + this.posologia +"');";      
+        query = "INSERT INTO prescricao (medico, paciente, data, hora, medicamento,posologia) VALUES ("
+                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.medicamento +"','" + this.posologia +"');";      
         
         return d.insere(query);
     }
