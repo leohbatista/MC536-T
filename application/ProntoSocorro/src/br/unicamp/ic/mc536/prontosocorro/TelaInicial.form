@@ -71,7 +71,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedicoMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico1">
+        <Menu class="javax.swing.JMenu" name="Paciente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Paciente"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -83,8 +83,11 @@
             </Property>
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PacienteMouseClicked"/>
+          </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico4">
+        <Menu class="javax.swing.JMenu" name="mConsulta4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consulta"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -136,7 +139,7 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico7">
+        <Menu class="javax.swing.JMenu" name="Doenca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Doen&#xe7;a"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -148,6 +151,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DoencaMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
