@@ -6,6 +6,7 @@
 
 package br.unicamp.ic.mc536.prontosocorro;
 
+import br.unicamp.ic.mc536.prontosocorro.doenca.BuscaDoenca;
 import br.unicamp.ic.mc536.prontosocorro.medico.BuscaMedico;
 import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
 import br.unicamp.ic.mc536.prontosocorro.medicamento.BuscaMedicamento;
@@ -43,7 +44,7 @@ public class TelaInicial extends javax.swing.JFrame {
         mMedico5 = new javax.swing.JMenu();
         mMedico2 = new javax.swing.JMenu();
         mMedico6 = new javax.swing.JMenu();
-        mMedico7 = new javax.swing.JMenu();
+        Doenca = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -141,12 +142,17 @@ public class TelaInicial extends javax.swing.JFrame {
         mMedico6.setName("mMedico"); // NOI18N
         menu.add(mMedico6);
 
-        mMedico7.setText("Doença");
-        mMedico7.setAutoscrolls(true);
-        mMedico7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mMedico7.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mMedico7.setName("mMedico"); // NOI18N
-        menu.add(mMedico7);
+        Doenca.setText("Doença");
+        Doenca.setAutoscrolls(true);
+        Doenca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Doenca.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        Doenca.setName("mMedico"); // NOI18N
+        Doenca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DoencaMouseClicked(evt);
+            }
+        });
+        menu.add(Doenca);
 
         setJMenuBar(menu);
 
@@ -172,10 +178,17 @@ public class TelaInicial extends javax.swing.JFrame {
         paciente.setVisible(true);
     }//GEN-LAST:event_PacienteMouseClicked
 
+<<<<<<< HEAD
     private void mMedico2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMedico2MouseClicked
          BuscaMedicamento medicamento = new BuscaMedicamento();
          medicamento.setVisible(true);
     }//GEN-LAST:event_mMedico2MouseClicked
+=======
+    private void DoencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoencaMouseClicked
+        BuscaDoenca doenca = new BuscaDoenca();
+        doenca.setVisible(true);
+    }//GEN-LAST:event_DoencaMouseClicked
+>>>>>>> bcd85d8e5cb1dbf369ee852fa6010dd3664a0fdd
 
     /**
      * @param args the command line arguments
@@ -215,6 +228,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Doenca;
     private javax.swing.JMenu Paciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -223,7 +237,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu mMedico2;
     private javax.swing.JMenu mMedico5;
     private javax.swing.JMenu mMedico6;
-    private javax.swing.JMenu mMedico7;
     private javax.swing.JMenu mSistema;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem opFechar;
