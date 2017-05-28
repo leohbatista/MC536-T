@@ -54,7 +54,7 @@ public class Prescricao {
         String query;
         switch(campo){
             case 1:     // O filtro é a medicamento
-                query = "SELECT * FROM prescricao WHERE medicamento LIKE '" + valor1 + "%';";
+                query = "SELECT * FROM prescricao WHERE medicamento" + valor1 + ";";
                 break;
             case 2:     // O filtro é o medico e paciente
                 query = "SELECT * FROM prescricao WHERE paciente ='" + valor1 + "' AND medico=" + valor2 + ";";
