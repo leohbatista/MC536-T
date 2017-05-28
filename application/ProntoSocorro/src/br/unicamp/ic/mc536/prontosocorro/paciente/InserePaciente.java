@@ -51,7 +51,6 @@ public class InserePaciente extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         edNome = new javax.swing.JTextField();
-        edCPF = new javax.swing.JTextField();
         edEndereco = new javax.swing.JTextField();
         btConfirma = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
@@ -59,6 +58,7 @@ public class InserePaciente extends javax.swing.JFrame {
         lbErro = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         edTelefone = new javax.swing.JFormattedTextField();
+        edCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Pacientes");
@@ -82,7 +82,7 @@ public class InserePaciente extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("* CPF:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 80, 60, 20);
+        jLabel4.setBounds(20, 70, 60, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("* Telefone:");
@@ -91,15 +91,11 @@ public class InserePaciente extends javax.swing.JFrame {
 
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edNome);
-        edNome.setBounds(130, 110, 260, 23);
-
-        edCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edCPF);
-        edCPF.setBounds(130, 80, 140, 23);
+        edNome.setBounds(130, 110, 260, 25);
 
         edEndereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edEndereco);
-        edEndereco.setBounds(130, 140, 260, 23);
+        edEndereco.setBounds(130, 140, 260, 25);
 
         btConfirma.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btConfirma.setText("CONFIRMA");
@@ -143,8 +139,19 @@ public class InserePaciente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        edTelefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel1.add(edTelefone);
-        edTelefone.setBounds(130, 170, 190, 20);
+        edTelefone.setBounds(130, 170, 190, 30);
+
+        edCPF.setColumns(11);
+        try {
+            edCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        edCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edCPF);
+        edCPF.setBounds(130, 70, 140, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, -2, 570, 280);
@@ -219,7 +226,7 @@ public class InserePaciente extends javax.swing.JFrame {
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JTextField edCPF;
+    private javax.swing.JFormattedTextField edCPF;
     private javax.swing.JTextField edEndereco;
     private javax.swing.JTextField edNome;
     private javax.swing.JFormattedTextField edTelefone;
