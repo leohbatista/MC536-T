@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.unicamp.ic.mc536.prontosocorro.paciente;
-import br.unicamp.ic.mc536.prontosocorro.medico.*;
+package br.unicamp.ic.mc536.prontosocorro.medicamento;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,31 +17,31 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Administrador
  */
-public class BuscaPaciente extends javax.swing.JFrame {
+public class BuscaMedicamento extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsFuncionario
      */
-    public BuscaPaciente() {
+    public BuscaMedicamento() {
         initComponents();
     }
     
     private void search() {
         if (chSemFiltro.isSelected()){
-            atualizaTabela(Paciente.consultar("",(short)-1));
+            atualizaTabela(Medicamento.consultar("",(short)-1));
             lbErro.setText("");
-        } else if(chCPF.isSelected()) {
+        } else if(chID.isSelected()) {
             try {
-                String cpf =edCPF.getText();
-                atualizaTabela(Paciente.consultar(edCPF.getText(),(short)1));
+                int id = Integer.parseInt(edID.getText());
+                atualizaTabela(Medicamento.consultar(""+id,(short)1));
                 lbErro.setText("");
             } catch (NumberFormatException e) {
                 lbErro.setText("O código deve ser um valor numérico!");
             }
-        } else if(chNome.isSelected()) {
-            atualizaTabela(Paciente.consultar(edNome.getText(),(short)2));
+        } else if(chPrincipio_Ativo.isSelected()) {
+            atualizaTabela(Medicamento.consultar(edPrincipio_Ativo.getText(),(short)2));
             lbErro.setText("");
-        } 
+        }
     }
     
     protected void atualizaTabela(ResultSet rs){
@@ -50,20 +49,20 @@ public class BuscaPaciente extends javax.swing.JFrame {
         modelotabela.setColumnCount(4);
         modelotabela.setRowCount(0);
 
-        tabela.getColumnModel().getColumn(0).setHeaderValue("CPF");
-        tabela.getColumnModel().getColumn(1).setHeaderValue("Nome");
-        tabela.getColumnModel().getColumn(2).setHeaderValue("Endereço");
-        tabela.getColumnModel().getColumn(3).setHeaderValue("Telefone");
+        tabela.getColumnModel().getColumn(0).setHeaderValue("ID");
+        tabela.getColumnModel().getColumn(1).setHeaderValue("Princípio Ativo");
+        tabela.getColumnModel().getColumn(2).setHeaderValue("Dosagem");
+        tabela.getColumnModel().getColumn(3).setHeaderValue("Contra-Indicação");
         
         int linha = 0;
         try{
             if(rs != null) {  
                 while(rs.next()){
                       modelotabela.addRow(new String[modelotabela.getColumnCount()]);
-                      modelotabela.setValueAt(rs.getString("cpf"), linha, 0);
-                      modelotabela.setValueAt(rs.getString("nome"), linha, 1);
-                      modelotabela.setValueAt(rs.getString("endereco"), linha, 2);
-                      modelotabela.setValueAt(rs.getString("telefone"), linha, 3);
+                      modelotabela.setValueAt(rs.getString("id_medicamento"), linha, 0);
+                      modelotabela.setValueAt(rs.getString("principio_ativo"), linha, 1);
+                      modelotabela.setValueAt(rs.getString("dosagem"), linha, 2);
+                      modelotabela.setValueAt(rs.getString("contra_indicacao"), linha, 3);
                       linha++;
                   }
             }
@@ -86,24 +85,21 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        edCPF = new javax.swing.JTextField();
-        edNome = new javax.swing.JTextField();
+        edID = new javax.swing.JTextField();
+        edPrincipio_Ativo = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
         chSemFiltro = new javax.swing.JCheckBox();
-        chNome = new javax.swing.JCheckBox();
-        chCPF = new javax.swing.JCheckBox();
+        chPrincipio_Ativo = new javax.swing.JCheckBox();
+        chID = new javax.swing.JCheckBox();
         btLimpar = new javax.swing.JButton();
+        btInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         lbErro = new javax.swing.JLabel();
-        btInserir = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-        btRemover = new javax.swing.JButton();
-        btAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Busca de Paciente");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setTitle("Busca de Medicamentos");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -117,7 +113,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Busca de Pacientes");
+        jLabel5.setText("Busca Medicamento");
         jPanel5.add(jLabel5);
         jLabel5.setBounds(0, 20, 570, 30);
 
@@ -129,15 +125,15 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jPanel6.add(jLabel6);
         jLabel6.setBounds(40, 10, 140, 20);
 
-        edCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        edCPF.setEnabled(false);
-        jPanel6.add(edCPF);
-        edCPF.setBounds(120, 40, 100, 25);
+        edID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edID.setEnabled(false);
+        jPanel6.add(edID);
+        edID.setBounds(130, 40, 100, 23);
 
-        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        edNome.setEnabled(false);
-        jPanel6.add(edNome);
-        edNome.setBounds(120, 70, 280, 25);
+        edPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edPrincipio_Ativo.setEnabled(false);
+        jPanel6.add(edPrincipio_Ativo);
+        edPrincipio_Ativo.setBounds(130, 70, 260, 23);
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btBuscar.setText("BUSCAR");
@@ -154,29 +150,29 @@ public class BuscaPaciente extends javax.swing.JFrame {
         chSemFiltro.setSelected(true);
         chSemFiltro.setText("Sem Filtro");
         jPanel6.add(chSemFiltro);
-        chSemFiltro.setBounds(315, 40, 97, 30);
+        chSemFiltro.setBounds(315, 40, 95, 30);
 
-        buttonGroup1.add(chNome);
-        chNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chNome.setText("Nome");
-        chNome.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(chPrincipio_Ativo);
+        chPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chPrincipio_Ativo.setText("Princípio ativo");
+        chPrincipio_Ativo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chNomeItemStateChanged(evt);
+                chPrincipio_AtivoItemStateChanged(evt);
             }
         });
-        jPanel6.add(chNome);
-        chNome.setBounds(10, 70, 70, 24);
+        jPanel6.add(chPrincipio_Ativo);
+        chPrincipio_Ativo.setBounds(10, 70, 120, 25);
 
-        buttonGroup1.add(chCPF);
-        chCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chCPF.setText("CPF");
-        chCPF.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(chID);
+        chID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chID.setText("ID");
+        chID.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chCPFItemStateChanged(evt);
+                chIDItemStateChanged(evt);
             }
         });
-        jPanel6.add(chCPF);
-        chCPF.setBounds(10, 40, 70, 24);
+        jPanel6.add(chID);
+        chID.setBounds(10, 40, 70, 25);
 
         btLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btLimpar.setText("Limpar");
@@ -191,6 +187,17 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jPanel6.add(btLimpar);
         btLimpar.setBounds(420, 40, 100, 30);
 
+        btInserir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btInserir.setText("INSERIR");
+        btInserir.setToolTipText("");
+        btInserir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btInserirMouseClicked(evt);
+            }
+        });
+        jPanel6.add(btInserir);
+        btInserir.setBounds(-60, 520, 110, 40);
+
         jPanel5.add(jPanel6);
         jPanel6.setBounds(20, 60, 530, 140);
 
@@ -200,7 +207,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 4", "Título 2"
+                "Title 4"
             }
         ));
         tabela.setIntercellSpacing(new java.awt.Dimension(2, 2));
@@ -216,22 +223,6 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jPanel5.add(lbErro);
         lbErro.setBounds(20, 540, 350, 30);
 
-        btInserir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btInserir.setText("INSERIR");
-        btInserir.setToolTipText("");
-        btInserir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btInserirMouseClicked(evt);
-            }
-        });
-        btInserir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInserirActionPerformed(evt);
-            }
-        });
-        jPanel5.add(btInserir);
-        btInserir.setBounds(20, 580, 110, 40);
-
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
         btVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,30 +233,10 @@ public class BuscaPaciente extends javax.swing.JFrame {
         jPanel5.add(btVoltar);
         btVoltar.setBounds(450, 580, 100, 40);
 
-        btRemover.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btRemover.setText("REMOVER");
-        btRemover.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btRemoverMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btRemover);
-        btRemover.setBounds(260, 580, 110, 40);
-
-        btAlterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btAlterar.setText("ALTERAR");
-        btAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btAlterarMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btAlterar);
-        btAlterar.setBounds(140, 580, 110, 40);
-
         getContentPane().add(jPanel5);
         jPanel5.setBounds(0, 0, 570, 630);
 
-        setSize(new java.awt.Dimension(584, 669));
+        setSize(new java.awt.Dimension(585, 669));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -273,23 +244,23 @@ public class BuscaPaciente extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_btBuscarMouseClicked
 
-    private void chNomeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNomeItemStateChanged
-        edNome.setEnabled(chNome.isSelected());
-    }//GEN-LAST:event_chNomeItemStateChanged
+    private void chPrincipio_AtivoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chPrincipio_AtivoItemStateChanged
+        edPrincipio_Ativo.setEnabled(chPrincipio_Ativo.isSelected());
+    }//GEN-LAST:event_chPrincipio_AtivoItemStateChanged
 
-    private void chCPFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCPFItemStateChanged
-        edCPF.setEnabled(chCPF.isSelected());
-    }//GEN-LAST:event_chCPFItemStateChanged
+    private void chIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chIDItemStateChanged
+        edID.setEnabled(chID.isSelected());
+    }//GEN-LAST:event_chIDItemStateChanged
  
     private void btLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLimparMouseClicked
-        edCPF.setText("");
-        edNome.setText("");
+        edID.setText("");
+        edPrincipio_Ativo.setText("");
         chSemFiltro.setSelected(true);
         btBuscarMouseClicked(evt);
     }//GEN-LAST:event_btLimparMouseClicked
 
     private void btInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btInserirMouseClicked
-        InserePaciente insere = new InserePaciente();
+        InsereMedicamento insere = new InsereMedicamento();
         insere.setVisible(true);
     }//GEN-LAST:event_btInserirMouseClicked
 
@@ -300,49 +271,6 @@ public class BuscaPaciente extends javax.swing.JFrame {
     private void btVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVoltarMouseClicked
         this.dispose();
     }//GEN-LAST:event_btVoltarMouseClicked
-
-    private void btRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRemoverMouseClicked
-        String cpf;
-        if(tabela.getSelectedRowCount() != 0){
-            cpf = tabela.getValueAt(tabela.getSelectedRow(),0).toString();
-            if((JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?","Confirmação",JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE)) == JOptionPane.YES_OPTION){
-                Paciente p = new Paciente(cpf,"","","");
-                p.excluir();
-                if (Paciente.verificaExclusao(cpf)){
-                    lbErro.setText("");
-                    JOptionPane.showMessageDialog(this, "Excluído com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
-                    btBuscarMouseClicked(evt);
-                } else {
-                    lbErro.setText("Erro ao excluir!");
-                } 
-            }
-        } else {
-            lbErro.setText("Selecione uma linha para excluir!");
-        }
-    }//GEN-LAST:event_btRemoverMouseClicked
-
-    private void btAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAlterarMouseClicked
-         if(tabela.getSelectedRowCount() != 0){
-            String cpf = tabela.getValueAt(tabela.getSelectedRow(),0).toString();
-            ResultSet rs = Paciente.consultar(""+cpf,(short)1);
-            try {
-                lbErro.setText("");
-                rs.next();
-                Paciente paciente = new Paciente(cpf, rs.getString("nome"), rs.getString("endereco"),rs.getString("telefone"));
-                InserePaciente alt = new InserePaciente(paciente);
-                alt.setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(BuscaPaciente.class.getName()).log(Level.SEVERE, null, ex);
-            }   
-        } else {
-            lbErro.setText("Selecione uma linha para alterar");
-        }
-    }//GEN-LAST:event_btAlterarMouseClicked
-
-    private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,10 +289,8 @@ public class BuscaPaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscaMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
@@ -373,25 +299,23 @@ public class BuscaPaciente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new BuscaPaciente().setVisible(true);
+            new BuscaMedicamento().setVisible(true);
         });
     }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAlterar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btInserir;
     private javax.swing.JButton btLimpar;
-    private javax.swing.JButton btRemover;
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JCheckBox chCPF;
-    private javax.swing.JCheckBox chNome;
+    private javax.swing.JCheckBox chID;
+    private javax.swing.JCheckBox chPrincipio_Ativo;
     private javax.swing.JCheckBox chSemFiltro;
-    private javax.swing.JTextField edCPF;
-    private javax.swing.JTextField edNome;
+    private javax.swing.JTextField edID;
+    private javax.swing.JTextField edPrincipio_Ativo;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel5;

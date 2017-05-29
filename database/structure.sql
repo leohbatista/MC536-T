@@ -43,12 +43,12 @@ CREATE TABLE IF NOT EXISTS laboratorio (
 CREATE TABLE IF NOT EXISTS consulta (
     medico INT NOT NULL,
     paciente VARCHAR(11) NOT NULL,
-    data DATE NULL,
-    hora TIME NULL,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
     diagnostico TEXT NULL,
     sintomas TEXT NULL,
     observacoes TEXT NULL,
-    PRIMARY KEY (medico , paciente),
+    PRIMARY KEY (medico , paciente,data,hora),
     CONSTRAINT fk_consulta_medico FOREIGN KEY (medico)
         REFERENCES medico (crm),
     CONSTRAINT fk_consulta_paciente FOREIGN KEY (paciente)
@@ -76,27 +76,31 @@ CREATE TABLE IF NOT EXISTS exame (
 
 CREATE TABLE IF NOT EXISTS prescricao (
     medico INT NOT NULL,
-    paciente VARCHAR(45) NOT NULL,
+    paciente VARCHAR(11) NOT NULL,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
     medicamento INT NOT NULL,
     posologia TEXT NULL,
     PRIMARY KEY (medico , paciente , medicamento),
     INDEX fk_prescricao_medicamento_idx (medicamento ASC),
-    INDEX fk_prescricao_consulta_idx (medico ASC , paciente ASC),
-    CONSTRAINT fk_prescricao_consulta FOREIGN KEY (medico , paciente)
-        REFERENCES consulta (medico , paciente),
+    INDEX fk_prescricao_consulta_idx (medico ASC , paciente ASC,data ASC,hora ASC),
+    CONSTRAINT fk_prescricao_consulta FOREIGN KEY (medico , paciente, data, hora)
+        REFERENCES consulta (medico , paciente, data, hora),
     CONSTRAINT fk_prescricao_medicamento FOREIGN KEY (medicamento)
         REFERENCES medicamento (id_medicamento)
 );
 
 CREATE TABLE IF NOT EXISTS diagnostico (
     medico INT NOT NULL,
-    paciente VARCHAR(45) NOT NULL,
+    paciente VARCHAR(11) NOT NULL,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
     doenca VARCHAR(5) NOT NULL,
     PRIMARY KEY (medico , paciente , doenca),
     INDEX fk_diagnostico_doenca_idx (doenca ASC),
-    INDEX fk_diagnostico_consulta_idx (medico ASC , paciente ASC),
-    CONSTRAINT fk_diagnostico_consulta FOREIGN KEY (medico , paciente)
-        REFERENCES consulta (medico , paciente),
+    INDEX fk_diagnostico_consulta_idx (medico ASC , paciente ASC,data ASC,hora ASC),
+    CONSTRAINT fk_diagnostico_consulta FOREIGN KEY (medico , paciente, data, hora)
+        REFERENCES consulta (medico , paciente, data, hora),
     CONSTRAINT fk_diagnostico_doenca FOREIGN KEY (doenca)
         REFERENCES doenca (cid)
 );

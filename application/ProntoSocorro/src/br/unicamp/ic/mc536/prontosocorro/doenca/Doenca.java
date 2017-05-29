@@ -7,9 +7,6 @@ package br.unicamp.ic.mc536.prontosocorro.doenca;
 
 import br.unicamp.ic.mc536.prontosocorro.Database;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,7 +28,7 @@ public class Doenca {
         String query;
         switch(campo){
             case 1:     // o filtro é o cid
-                query= "SELECT * FROM doenca WHERE cpf LIKE '" + valor + "%';";
+                query= "SELECT * FROM doenca WHERE cid LIKE '" + valor + "%';";
                 break;
             case 2:     // O filtro é o campo nome
                 query= "SELECT * FROM doenca WHERE nome LIKE '" + valor + "%';";

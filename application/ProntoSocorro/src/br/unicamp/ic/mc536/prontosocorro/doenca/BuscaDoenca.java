@@ -7,9 +7,7 @@
 package br.unicamp.ic.mc536.prontosocorro.doenca;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -43,9 +41,11 @@ public class BuscaDoenca extends javax.swing.JFrame {
         DefaultTableModel modelotabela = (DefaultTableModel) tabela.getModel();
         modelotabela.setColumnCount(2);
         modelotabela.setRowCount(0);
-
+        tabela.getColumnModel().getColumn(0).setWidth(20);
+        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         tabela.getColumnModel().getColumn(0).setHeaderValue("CID");
         tabela.getColumnModel().getColumn(1).setHeaderValue("Nome");
+        
         int linha = 0;
         try{
             if(rs != null) {  

@@ -9,6 +9,7 @@ package br.unicamp.ic.mc536.prontosocorro;
 import br.unicamp.ic.mc536.prontosocorro.doenca.BuscaDoenca;
 import br.unicamp.ic.mc536.prontosocorro.medico.BuscaMedico;
 import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
+import br.unicamp.ic.mc536.prontosocorro.medicamento.BuscaMedicamento;
 
 /**
  *
@@ -50,7 +51,6 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pronto, Socorro");
         setMinimumSize(new java.awt.Dimension(950, 700));
-        setPreferredSize(new java.awt.Dimension(950, 700));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -128,6 +128,11 @@ public class TelaInicial extends javax.swing.JFrame {
         mMedico2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mMedico2.setMargin(new java.awt.Insets(5, 5, 5, 10));
         mMedico2.setName("mMedico"); // NOI18N
+        mMedico2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mMedico2MouseClicked(evt);
+            }
+        });
         menu.add(mMedico2);
 
         mMedico6.setText("Laboratório");
@@ -173,10 +178,17 @@ public class TelaInicial extends javax.swing.JFrame {
         paciente.setVisible(true);
     }//GEN-LAST:event_PacienteMouseClicked
 
+
+    private void mMedico2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMedico2MouseClicked
+         BuscaMedicamento medicamento = new BuscaMedicamento();
+         medicamento.setVisible(true);
+    }//GEN-LAST:event_mMedico2MouseClicked
+
     private void DoencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoencaMouseClicked
         BuscaDoenca doenca = new BuscaDoenca();
         doenca.setVisible(true);
     }//GEN-LAST:event_DoencaMouseClicked
+
 
     /**
      * @param args the command line arguments

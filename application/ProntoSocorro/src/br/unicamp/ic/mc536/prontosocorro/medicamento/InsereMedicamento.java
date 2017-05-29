@@ -1,4 +1,4 @@
-package br.unicamp.ic.mc536.prontosocorro.paciente;
+package br.unicamp.ic.mc536.prontosocorro.medicamento;
 
 import javax.swing.JOptionPane;
 
@@ -12,26 +12,25 @@ import javax.swing.JOptionPane;
  *
  * @author aluno
  */
-public class InserePaciente extends javax.swing.JFrame {
+public class InsereMedicamento extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroClienteFisica
      */
     
     boolean flagUpdate;
-    Paciente paciente;
+    Medicamento medicamento;
     
-    public InserePaciente() {
+    public InsereMedicamento() {
         initComponents();
         flagUpdate = false;
     }
     
-    public InserePaciente(Paciente p) {
+    public InsereMedicamento(Medicamento m) {
         initComponents();
-        paciente = p;
+        medicamento = m;
         flagUpdate = true;
-        inicializaCampos();
-        edCPF.setEditable(false);
+        edID.setEditable(false);
     }
 
     /**
@@ -50,18 +49,18 @@ public class InserePaciente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        edNome = new javax.swing.JTextField();
-        edEndereco = new javax.swing.JTextField();
+        edPrincipio_Ativo = new javax.swing.JTextField();
+        edID = new javax.swing.JTextField();
+        edContra_Indicacao = new javax.swing.JTextField();
         btConfirma = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         lbErro = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        edTelefone = new javax.swing.JFormattedTextField();
-        edCPF = new javax.swing.JFormattedTextField();
+        edDosagem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de Pacientes");
+        setTitle("Cadastro de Medicamentos");
         setName("janela"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(null);
@@ -70,32 +69,36 @@ public class InserePaciente extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Cadastro Paciente");
+        jLabel2.setText("Cadastro de Medicamentos:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 20, 550, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("* Nome:");
+        jLabel3.setText("* Principio Ativo:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 110, 60, 20);
+        jLabel3.setBounds(20, 110, 102, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("* CPF:");
+        jLabel4.setText("* ID:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 70, 60, 30);
+        jLabel4.setBounds(20, 80, 60, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("* Telefone:");
+        jLabel5.setText("*Contra-Indicação:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 170, 100, 20);
+        jLabel5.setBounds(20, 170, 120, 20);
 
-        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edNome);
-        edNome.setBounds(130, 110, 260, 25);
+        edPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edPrincipio_Ativo);
+        edPrincipio_Ativo.setBounds(150, 110, 260, 23);
 
-        edEndereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edEndereco);
-        edEndereco.setBounds(130, 140, 260, 25);
+        edID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edID);
+        edID.setBounds(150, 80, 140, 23);
+
+        edContra_Indicacao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edContra_Indicacao);
+        edContra_Indicacao.setBounds(150, 170, 260, 23);
 
         btConfirma.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btConfirma.setText("CONFIRMA");
@@ -120,7 +123,7 @@ public class InserePaciente extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("* Campo Obrigatório");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(380, 190, 150, 17);
+        jLabel16.setBounds(390, 200, 150, 17);
 
         lbErro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbErro.setForeground(new java.awt.Color(255, 0, 51));
@@ -130,28 +133,13 @@ public class InserePaciente extends javax.swing.JFrame {
         lbErro.setBounds(10, 360, 360, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("* Endereço:");
+        jLabel6.setText("* Dosagem:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(20, 140, 100, 20);
 
-        try {
-            edTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # - #### - ####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        edTelefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel1.add(edTelefone);
-        edTelefone.setBounds(130, 170, 190, 30);
-
-        edCPF.setColumns(11);
-        try {
-            edCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        edCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edCPF);
-        edCPF.setBounds(130, 70, 140, 30);
+        edDosagem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edDosagem);
+        edDosagem.setBounds(150, 140, 260, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, -2, 570, 280);
@@ -161,27 +149,26 @@ public class InserePaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConfirmaMouseClicked
+        String txtID;
+        int ID;
         try {
-            String CPF = edCPF.getText().trim();
-            String telefone = edTelefone.getText().trim();
-            String nome = edNome.getText().trim();
-            String endereco = edEndereco.getText().trim();   
-            if((CPF.equals("")) || (nome.equals("")) || (telefone.equals("")) || (endereco.equals("")) ){            
+            txtID = edID.getText().trim();
+            ID = Integer.parseInt(txtID);
+            String principio_ativo = edPrincipio_Ativo.getText().trim();
+            String dosagem = edDosagem.getText().trim(); 
+            String contra_indicacao = edContra_Indicacao.getText().trim();
+            if((txtID.equals("")) || (principio_ativo.equals("")) || (dosagem.equals("")) || (contra_indicacao.equals(""))){            
                 lbErro.setText("Preencha os campos obrigatórios");
             } else {  
-                Paciente paciente = new Paciente(CPF, nome, endereco, telefone);
+                Medicamento medicamento = new Medicamento(ID, principio_ativo, dosagem, contra_indicacao);
                 if (!flagUpdate) {
-                    paciente.novo();
-                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    paciente.alterar();
-                    JOptionPane.showMessageDialog(this, "Alterado com sucesso!", "Atualização", JOptionPane.INFORMATION_MESSAGE);
-                }
-                
+                    medicamento.novo();
+                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE) ;              
                 this.dispose();
+                }
             }
         } catch (NumberFormatException e) {
-            lbErro.setText("CPF inválido");        
+            lbErro.setText("ID inválido");        
         }
         
     }//GEN-LAST:event_btConfirmaMouseClicked
@@ -207,7 +194,7 @@ public class InserePaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InserePaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InsereMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -217,7 +204,7 @@ public class InserePaciente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new InserePaciente().setVisible(true);
+            new InsereMedicamento().setVisible(true);
         });
     }
 
@@ -226,10 +213,10 @@ public class InserePaciente extends javax.swing.JFrame {
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JFormattedTextField edCPF;
-    private javax.swing.JTextField edEndereco;
-    private javax.swing.JTextField edNome;
-    private javax.swing.JFormattedTextField edTelefone;
+    private javax.swing.JTextField edContra_Indicacao;
+    private javax.swing.JTextField edDosagem;
+    private javax.swing.JTextField edID;
+    private javax.swing.JTextField edPrincipio_Ativo;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,10 +227,5 @@ public class InserePaciente extends javax.swing.JFrame {
     private javax.swing.JLabel lbErro;
     // End of variables declaration//GEN-END:variables
     
-    private void inicializaCampos() {
-        edCPF.setText(""+paciente.getCPF());
-        edNome.setText(paciente.getNome());
-        edEndereco.setText(paciente.getEndereco());
-        edTelefone.setText(paciente.getTelefone());
-    }
+ 
 }
