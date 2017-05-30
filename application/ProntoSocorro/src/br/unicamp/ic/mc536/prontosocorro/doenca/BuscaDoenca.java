@@ -5,8 +5,13 @@
  */
 
 package br.unicamp.ic.mc536.prontosocorro.doenca;
+import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
+import br.unicamp.ic.mc536.prontosocorro.paciente.InserePaciente;
+import br.unicamp.ic.mc536.prontosocorro.paciente.Paciente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,7 +34,7 @@ public class BuscaDoenca extends javax.swing.JFrame {
             atualizaTabela(Doenca.consultar("",(short)-1));
             lbErro.setText("");
         } else if(chCID.isSelected()) {
-            atualizaTabela(Doenca.consultar(edCID.getText(),(short)2));
+            atualizaTabela(Doenca.consultar(edCID.getText(),(short)1));
             lbErro.setText("");
         } else if(chNome.isSelected()) {
             atualizaTabela(Doenca.consultar(edNome.getText(),(short)2));
@@ -86,6 +91,7 @@ public class BuscaDoenca extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         lbErro = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
+        detalhes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Busca de Médicos");
@@ -210,6 +216,16 @@ public class BuscaDoenca extends javax.swing.JFrame {
         jPanel5.add(btVoltar);
         btVoltar.setBounds(450, 580, 100, 40);
 
+        detalhes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        detalhes.setText("DETALHES");
+        detalhes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detalhesMouseClicked(evt);
+            }
+        });
+        jPanel5.add(detalhes);
+        detalhes.setBounds(20, 579, 120, 40);
+
         getContentPane().add(jPanel5);
         jPanel5.setBounds(0, 0, 570, 630);
 
@@ -243,6 +259,25 @@ public class BuscaDoenca extends javax.swing.JFrame {
     private void btVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVoltarMouseClicked
         this.dispose();
     }//GEN-LAST:event_btVoltarMouseClicked
+
+    private void detalhesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detalhesMouseClicked
+        if(tabela.getSelectedRowCount() != 0){
+            String cid = tabela.getValueAt(tabela.getSelectedRow(),0).toString();
+            ResultSet rs = Doenca.consultar(cid,(short)1);
+            try {
+                lbErro.setText("");
+                rs.next();
+                Doenca doenca = new Doenca(cid, rs.getString("nome"));
+                EmDoenca det = new EmDoenca(doenca);
+                det.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(BuscaDoenca.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        } else {
+            lbErro.setText("Selecione uma doença para ver detalhes.");
+        }
+
+    }//GEN-LAST:event_detalhesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -287,6 +322,7 @@ public class BuscaDoenca extends javax.swing.JFrame {
     private javax.swing.JCheckBox chCID;
     private javax.swing.JCheckBox chNome;
     private javax.swing.JCheckBox chSemFiltro;
+    private javax.swing.JButton detalhes;
     private javax.swing.JTextField edCID;
     private javax.swing.JTextField edNome;
     private javax.swing.JLabel jLabel5;

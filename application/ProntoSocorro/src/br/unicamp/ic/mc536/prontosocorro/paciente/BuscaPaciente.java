@@ -132,12 +132,12 @@ public class BuscaPaciente extends javax.swing.JFrame {
         edCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edCPF.setEnabled(false);
         jPanel6.add(edCPF);
-        edCPF.setBounds(120, 40, 100, 25);
+        edCPF.setBounds(120, 40, 100, 27);
 
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edNome.setEnabled(false);
         jPanel6.add(edNome);
-        edNome.setBounds(120, 70, 280, 25);
+        edNome.setBounds(120, 70, 280, 27);
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btBuscar.setText("BUSCAR");
@@ -154,7 +154,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
         chSemFiltro.setSelected(true);
         chSemFiltro.setText("Sem Filtro");
         jPanel6.add(chSemFiltro);
-        chSemFiltro.setBounds(315, 40, 97, 30);
+        chSemFiltro.setBounds(315, 40, 103, 30);
 
         buttonGroup1.add(chNome);
         chNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -165,7 +165,7 @@ public class BuscaPaciente extends javax.swing.JFrame {
             }
         });
         jPanel6.add(chNome);
-        chNome.setBounds(10, 70, 70, 24);
+        chNome.setBounds(10, 70, 70, 23);
 
         buttonGroup1.add(chCPF);
         chCPF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -176,13 +176,12 @@ public class BuscaPaciente extends javax.swing.JFrame {
             }
         });
         jPanel6.add(chCPF);
-        chCPF.setBounds(10, 40, 70, 24);
+        chCPF.setBounds(10, 40, 70, 23);
 
         btLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btLimpar.setText("Limpar");
         btLimpar.setToolTipText("");
         btLimpar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btLimpar.setOpaque(false);
         btLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btLimparMouseClicked(evt);
@@ -257,6 +256,11 @@ public class BuscaPaciente extends javax.swing.JFrame {
         btAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btAlterarMouseClicked(evt);
+            }
+        });
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAlterarActionPerformed(evt);
             }
         });
         jPanel5.add(btAlterar);
@@ -343,6 +347,10 @@ public class BuscaPaciente extends javax.swing.JFrame {
     private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btInserirActionPerformed
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAlterarActionPerformed
 
     /**
      * @param args the command line arguments
