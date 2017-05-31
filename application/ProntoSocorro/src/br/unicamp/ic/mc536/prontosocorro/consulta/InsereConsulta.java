@@ -359,13 +359,13 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarMouseClicked
 
     private void btConfirmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConfirmaMouseClicked
-        String txtCRM;
+        /*String txtCRM;
         int CRM;
         try {
             txtCRM = edMinuto.getText().trim();
             CRM = Integer.parseInt(txtCRM);
             String nome = edPaciente.getText().trim();
-            String especialidade = edEspecialidade.getText().trim();
+            //String especialidade = edEspecialidade.getText().trim();
             if((txtCRM.equals("")) || (nome.equals("")) || (especialidade.equals(""))){
                 lbErro.setText("Preencha os campos obrigatórios");
             } else {
@@ -382,7 +382,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             }
         } catch (NumberFormatException e) {
             lbErro.setText("CRM inválido");
-        }
+        }*/
 
     }//GEN-LAST:event_btConfirmaMouseClicked
 
@@ -514,5 +514,16 @@ public class InsereConsulta extends javax.swing.JFrame {
         edMedico.setText(""+consulta.getCRM());
         edPaciente.setText(consulta.getCPF());
         
+        String [] data = consulta.getData().toString().split("-");
+        String [] hora = consulta.getHora().toString().split(":");
+        edAno.setText(data[0]);
+        edMes.setText(data[1]);
+        edDia.setText(data[2]);
+        edHora.setText(hora[0]);
+        edMinuto.setText(hora[1]);
+        
+        taDiagnostico.setText(consulta.getDiagnostico());
+        taSintomas.setText(consulta.getDiagnostico());
+        taObservacoes.setText(consulta.getDiagnostico());
     }
 }

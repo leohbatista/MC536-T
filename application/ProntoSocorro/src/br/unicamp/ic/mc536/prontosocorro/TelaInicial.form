@@ -71,7 +71,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedicoMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Paciente">
+        <Menu class="javax.swing.JMenu" name="mPaciente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Paciente"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -84,10 +84,10 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PacienteMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mPacienteMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mConsulta4">
+        <Menu class="javax.swing.JMenu" name="mConsulta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consulta"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -99,8 +99,11 @@
             </Property>
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mConsultaMouseClicked"/>
+          </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico5">
+        <Menu class="javax.swing.JMenu" name="mExame">
           <Properties>
             <Property name="text" type="java.lang.String" value="Exame"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -113,7 +116,7 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico2">
+        <Menu class="javax.swing.JMenu" name="mMedicamento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Medicamento"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -126,10 +129,10 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedico2MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedicamentoMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico6">
+        <Menu class="javax.swing.JMenu" name="mLaboratorio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Laborat&#xf3;rio"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -142,7 +145,7 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Doenca">
+        <Menu class="javax.swing.JMenu" name="mDoenca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Doen&#xe7;a"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -155,7 +158,7 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DoencaMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mDoencaMouseClicked"/>
           </Events>
         </Menu>
       </SubComponents>

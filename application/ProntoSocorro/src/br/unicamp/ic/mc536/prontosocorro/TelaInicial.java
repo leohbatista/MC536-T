@@ -6,6 +6,7 @@
 
 package br.unicamp.ic.mc536.prontosocorro;
 
+import br.unicamp.ic.mc536.prontosocorro.consulta.BuscaConsulta;
 import br.unicamp.ic.mc536.prontosocorro.doenca.BuscaDoenca;
 import br.unicamp.ic.mc536.prontosocorro.medico.BuscaMedico;
 import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
@@ -39,12 +40,12 @@ public class TelaInicial extends javax.swing.JFrame {
         mSistema = new javax.swing.JMenu();
         opFechar = new javax.swing.JMenuItem();
         mMedico = new javax.swing.JMenu();
-        Paciente = new javax.swing.JMenu();
-        mConsulta4 = new javax.swing.JMenu();
-        mMedico5 = new javax.swing.JMenu();
-        mMedico2 = new javax.swing.JMenu();
-        mMedico6 = new javax.swing.JMenu();
-        Doenca = new javax.swing.JMenu();
+        mPaciente = new javax.swing.JMenu();
+        mConsulta = new javax.swing.JMenu();
+        mExame = new javax.swing.JMenu();
+        mMedicamento = new javax.swing.JMenu();
+        mLaboratorio = new javax.swing.JMenu();
+        mDoenca = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -97,62 +98,67 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menu.add(mMedico);
 
-        Paciente.setText("Paciente");
-        Paciente.setAutoscrolls(true);
-        Paciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Paciente.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        Paciente.setName("mMedico"); // NOI18N
-        Paciente.addMouseListener(new java.awt.event.MouseAdapter() {
+        mPaciente.setText("Paciente");
+        mPaciente.setAutoscrolls(true);
+        mPaciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mPaciente.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mPaciente.setName("mMedico"); // NOI18N
+        mPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PacienteMouseClicked(evt);
+                mPacienteMouseClicked(evt);
             }
         });
-        menu.add(Paciente);
+        menu.add(mPaciente);
 
-        mConsulta4.setText("Consulta");
-        mConsulta4.setAutoscrolls(true);
-        mConsulta4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mConsulta4.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mConsulta4.setName("mMedico"); // NOI18N
-        menu.add(mConsulta4);
-
-        mMedico5.setText("Exame");
-        mMedico5.setAutoscrolls(true);
-        mMedico5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mMedico5.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mMedico5.setName("mMedico"); // NOI18N
-        menu.add(mMedico5);
-
-        mMedico2.setText("Medicamento");
-        mMedico2.setAutoscrolls(true);
-        mMedico2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mMedico2.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mMedico2.setName("mMedico"); // NOI18N
-        mMedico2.addMouseListener(new java.awt.event.MouseAdapter() {
+        mConsulta.setText("Consulta");
+        mConsulta.setAutoscrolls(true);
+        mConsulta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mConsulta.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mConsulta.setName("mMedico"); // NOI18N
+        mConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mMedico2MouseClicked(evt);
+                mConsultaMouseClicked(evt);
             }
         });
-        menu.add(mMedico2);
+        menu.add(mConsulta);
 
-        mMedico6.setText("Laboratório");
-        mMedico6.setAutoscrolls(true);
-        mMedico6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mMedico6.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mMedico6.setName("mMedico"); // NOI18N
-        menu.add(mMedico6);
+        mExame.setText("Exame");
+        mExame.setAutoscrolls(true);
+        mExame.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mExame.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mExame.setName("mMedico"); // NOI18N
+        menu.add(mExame);
 
-        Doenca.setText("Doença");
-        Doenca.setAutoscrolls(true);
-        Doenca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Doenca.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        Doenca.setName("mMedico"); // NOI18N
-        Doenca.addMouseListener(new java.awt.event.MouseAdapter() {
+        mMedicamento.setText("Medicamento");
+        mMedicamento.setAutoscrolls(true);
+        mMedicamento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mMedicamento.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mMedicamento.setName("mMedico"); // NOI18N
+        mMedicamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DoencaMouseClicked(evt);
+                mMedicamentoMouseClicked(evt);
             }
         });
-        menu.add(Doenca);
+        menu.add(mMedicamento);
+
+        mLaboratorio.setText("Laboratório");
+        mLaboratorio.setAutoscrolls(true);
+        mLaboratorio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mLaboratorio.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mLaboratorio.setName("mMedico"); // NOI18N
+        menu.add(mLaboratorio);
+
+        mDoenca.setText("Doença");
+        mDoenca.setAutoscrolls(true);
+        mDoenca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mDoenca.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mDoenca.setName("mMedico"); // NOI18N
+        mDoenca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mDoencaMouseClicked(evt);
+            }
+        });
+        menu.add(mDoenca);
 
         setJMenuBar(menu);
 
@@ -173,21 +179,26 @@ public class TelaInicial extends javax.swing.JFrame {
         medico.setVisible(true);
     }//GEN-LAST:event_mMedicoMouseClicked
 
-    private void PacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PacienteMouseClicked
+    private void mPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mPacienteMouseClicked
         BuscaPaciente paciente = new BuscaPaciente();
         paciente.setVisible(true);
-    }//GEN-LAST:event_PacienteMouseClicked
+    }//GEN-LAST:event_mPacienteMouseClicked
 
 
-    private void mMedico2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMedico2MouseClicked
+    private void mMedicamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMedicamentoMouseClicked
          BuscaMedicamento medicamento = new BuscaMedicamento();
          medicamento.setVisible(true);
-    }//GEN-LAST:event_mMedico2MouseClicked
+    }//GEN-LAST:event_mMedicamentoMouseClicked
 
-    private void DoencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoencaMouseClicked
+    private void mDoencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mDoencaMouseClicked
         BuscaDoenca doenca = new BuscaDoenca();
         doenca.setVisible(true);
-    }//GEN-LAST:event_DoencaMouseClicked
+    }//GEN-LAST:event_mDoencaMouseClicked
+
+    private void mConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mConsultaMouseClicked
+        BuscaConsulta consulta = new BuscaConsulta();
+        consulta.setVisible(true);
+    }//GEN-LAST:event_mConsultaMouseClicked
 
 
     /**
@@ -228,15 +239,15 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Doenca;
-    private javax.swing.JMenu Paciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu mConsulta4;
+    private javax.swing.JMenu mConsulta;
+    private javax.swing.JMenu mDoenca;
+    private javax.swing.JMenu mExame;
+    private javax.swing.JMenu mLaboratorio;
+    private javax.swing.JMenu mMedicamento;
     private javax.swing.JMenu mMedico;
-    private javax.swing.JMenu mMedico2;
-    private javax.swing.JMenu mMedico5;
-    private javax.swing.JMenu mMedico6;
+    private javax.swing.JMenu mPaciente;
     private javax.swing.JMenu mSistema;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem opFechar;

@@ -52,7 +52,7 @@ public class Tratamento {
                 query = "SELECT * FROM tratamento WHERE medicamento =" + valor + ";";
                 break;
             case 2:     // O filtro é a doenca
-                query = "SELECT * FROM tratamento WHERE paciente LIKE ='"+ valor +"'%;";
+                query = "SELECT * FROM tratamento WHERE doenca LIKE ='"+ valor +"'%;";
                 break;
             default: 
                 query = "SELECT * FROM tratamento;";

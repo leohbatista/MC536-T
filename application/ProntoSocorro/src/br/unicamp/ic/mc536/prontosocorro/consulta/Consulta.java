@@ -100,9 +100,19 @@ public class Consulta {
         return d.remove(query); 
     }
 
-    public static ResultSet consultar(String valor, short campo) {
+    public static ResultSet consultar() {
+        String query = 
+                "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "
+                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF;";
+        
+        Database d = new Database();
+        d.conecta();
+        return d.consulta(query);
+    }
+    
+    public static ResultSet consultar(String valor, short flag) {
         String query;
-        switch(campo){
+        switch(flag){
             case 1:     // O filtro é o campo 
                 query= "SELECT * FROM consulta WHERE medico=" + valor + ";";
                 break;
@@ -122,11 +132,22 @@ public class Consulta {
         return d.consulta(query);
     }
 
-    public static ResultSet consultar(String valor1, String valor2) {
+    public static ResultSet consultar(String valor1, String valor2,short flag) {
         String query;
-        query= "SELECT * FROM consulta WHERE medico=" + valor1
-                + " and paciente='" + valor2 + "';";                
+        switch(flag){
+            case 1:
+                query= "SELECT * FROM consulta WHERE medico=" + valor1
+                        + " AND paciente='" + valor2 + "';";                
+            case 2:     // O filtro é o campo 
+                query= "SELECT * FROM consulta WHERE data='" + valor1
+                        + "' AND hora='" + valor2 + "';";
+                break;
+            default: 
+                query = "SELECT * FROM consulta;";
+                break;
             
+        }
+        
         Database d = new Database();
         d.conecta();
         return d.consulta(query);
@@ -243,6 +264,32 @@ public class Consulta {
 
     public void setListaPrescricao(ArrayList<Prescricao> listaPrescricao) {
         this.listaPrescricao = listaPrescricao;
+    }
+    
+    public static boolean validaData(int dia, int mes, int ano) {
+        if (dia < 1 || dia > 31) {
+            return false;
+        } else if (mes < 1 || mes > 12) {
+            return false;
+        } else if (ano < 1900 || ano > 2099) {
+            return false;
+        } else if (mes == 2 && dia > 29) {
+            return false;
+        } else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11 ) && dia > 30) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean validaHora(int hora, int minuto) {
+        if (hora < 0 || hora > 23) {
+            return false;
+        } else if (minuto < 0 || minuto > 59) {
+            return false;
+        }
+        
+        return true;
     }
     
     
