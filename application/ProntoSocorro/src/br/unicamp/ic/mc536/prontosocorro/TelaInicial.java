@@ -44,7 +44,7 @@ public class TelaInicial extends javax.swing.JFrame {
         mConsulta4 = new javax.swing.JMenu();
         mMedico5 = new javax.swing.JMenu();
         mMedico2 = new javax.swing.JMenu();
-        mMedico6 = new javax.swing.JMenu();
+        Laboratorio = new javax.swing.JMenu();
         Doenca = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -136,17 +136,17 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menu.add(mMedico2);
 
-        mMedico6.setText("Laboratório");
-        mMedico6.setAutoscrolls(true);
-        mMedico6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mMedico6.setMargin(new java.awt.Insets(5, 5, 5, 10));
-        mMedico6.setName("mMedico"); // NOI18N
-        mMedico6.addMouseListener(new java.awt.event.MouseAdapter() {
+        Laboratorio.setText("Laboratório");
+        Laboratorio.setAutoscrolls(true);
+        Laboratorio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Laboratorio.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        Laboratorio.setName("mMedico"); // NOI18N
+        Laboratorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mMedico6MouseClicked(evt);
+                LaboratorioMouseClicked(evt);
             }
         });
-        menu.add(mMedico6);
+        menu.add(Laboratorio);
 
         Doenca.setText("Doença");
         Doenca.setAutoscrolls(true);
@@ -195,10 +195,10 @@ public class TelaInicial extends javax.swing.JFrame {
         doenca.setVisible(true);
     }//GEN-LAST:event_DoencaMouseClicked
 
-    private void mMedico6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMedico6MouseClicked
+    private void LaboratorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LaboratorioMouseClicked
         BuscaLaboratorio laboratorio = new BuscaLaboratorio();
         laboratorio.setVisible(true);
-    }//GEN-LAST:event_mMedico6MouseClicked
+    }//GEN-LAST:event_LaboratorioMouseClicked
 
 
     /**
@@ -240,6 +240,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Doenca;
+    private javax.swing.JMenu Laboratorio;
     private javax.swing.JMenu Paciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -247,7 +248,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu mMedico;
     private javax.swing.JMenu mMedico2;
     private javax.swing.JMenu mMedico5;
-    private javax.swing.JMenu mMedico6;
     private javax.swing.JMenu mSistema;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem opFechar;

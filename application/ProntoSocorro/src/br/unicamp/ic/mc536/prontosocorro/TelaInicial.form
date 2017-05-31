@@ -129,7 +129,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedico2MouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mMedico6">
+        <Menu class="javax.swing.JMenu" name="Laboratorio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Laborat&#xf3;rio"/>
             <Property name="autoscrolls" type="boolean" value="true"/>
@@ -142,7 +142,7 @@
             <Property name="name" type="java.lang.String" value="mMedico" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mMedico6MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LaboratorioMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="Doenca">
