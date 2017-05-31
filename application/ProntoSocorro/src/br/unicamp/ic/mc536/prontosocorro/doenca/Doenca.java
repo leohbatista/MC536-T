@@ -20,6 +20,8 @@ public class Doenca {
     public Doenca (String cid, String nome){
         this.cid = cid;
         this.nome = nome;
+        d = new Database();
+        d.conecta();
     }
     
     public static ResultSet consultar(String valor, short campo) {
