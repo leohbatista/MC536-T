@@ -30,7 +30,7 @@ public class InsereMedicamento extends javax.swing.JFrame {
         initComponents();
         medicamento = m;
         flagUpdate = true;
-        edID.setEditable(false);
+       
     }
 
     /**
@@ -47,10 +47,8 @@ public class InsereMedicamento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         edPrincipio_Ativo = new javax.swing.JTextField();
-        edID = new javax.swing.JTextField();
         edContra_Indicacao = new javax.swing.JTextField();
         btConfirma = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
@@ -78,11 +76,6 @@ public class InsereMedicamento extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 110, 102, 20);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("* ID:");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 80, 60, 20);
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("*Contra-Indicação:");
         jPanel1.add(jLabel5);
@@ -91,10 +84,6 @@ public class InsereMedicamento extends javax.swing.JFrame {
         edPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edPrincipio_Ativo);
         edPrincipio_Ativo.setBounds(150, 110, 260, 23);
-
-        edID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edID);
-        edID.setBounds(150, 80, 140, 23);
 
         edContra_Indicacao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edContra_Indicacao);
@@ -152,15 +141,13 @@ public class InsereMedicamento extends javax.swing.JFrame {
         String txtID;
         int ID;
         try {
-            txtID = edID.getText().trim();
-            ID = Integer.parseInt(txtID);
             String principio_ativo = edPrincipio_Ativo.getText().trim();
             String dosagem = edDosagem.getText().trim(); 
             String contra_indicacao = edContra_Indicacao.getText().trim();
-            if((txtID.equals("")) || (principio_ativo.equals("")) || (dosagem.equals("")) || (contra_indicacao.equals(""))){            
+            if((principio_ativo.equals("")) || (dosagem.equals("")) || (contra_indicacao.equals(""))){            
                 lbErro.setText("Preencha os campos obrigatórios");
             } else {  
-                Medicamento medicamento = new Medicamento(ID, principio_ativo, dosagem, contra_indicacao);
+                Medicamento medicamento = new Medicamento(0, principio_ativo, dosagem, contra_indicacao);
                 if (!flagUpdate) {
                     medicamento.novo();
                     JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE) ;              
@@ -215,12 +202,10 @@ public class InsereMedicamento extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField edContra_Indicacao;
     private javax.swing.JTextField edDosagem;
-    private javax.swing.JTextField edID;
     private javax.swing.JTextField edPrincipio_Ativo;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

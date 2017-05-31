@@ -359,7 +359,7 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarMouseClicked
 
     private void btConfirmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConfirmaMouseClicked
-        String txtCRM;
+    /*    String txtCRM;
         int CRM;
         try {
             txtCRM = edMinuto.getText().trim();
@@ -383,7 +383,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             lbErro.setText("CRM inválido");
         }
-
+        */
     }//GEN-LAST:event_btConfirmaMouseClicked
 
     private void btPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btPacienteMouseClicked
