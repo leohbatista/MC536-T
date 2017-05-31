@@ -49,11 +49,11 @@ public class EmDoenca extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        edNome = new javax.swing.JTextField();
         btVoltar = new javax.swing.JButton();
         lbErro = new javax.swing.JLabel();
-        edNome1 = new javax.swing.JTextField();
         edCID = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        edNome = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Pacientes");
@@ -79,10 +79,6 @@ public class EmDoenca extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 70, 60, 30);
 
-        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edNome);
-        edNome.setBounds(130, 110, 410, 27);
-
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
         btVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -91,7 +87,7 @@ public class EmDoenca extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btVoltar);
-        btVoltar.setBounds(210, 150, 120, 40);
+        btVoltar.setBounds(210, 180, 120, 40);
 
         lbErro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbErro.setForeground(new java.awt.Color(255, 0, 51));
@@ -100,18 +96,23 @@ public class EmDoenca extends javax.swing.JFrame {
         jPanel1.add(lbErro);
         lbErro.setBounds(10, 360, 360, 30);
 
-        edNome1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edNome1);
-        edNome1.setBounds(130, 110, 410, 27);
-
         edCID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edCID);
         edCID.setBounds(130, 70, 140, 27);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, -2, 570, 200);
+        edNome.setColumns(20);
+        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edNome.setLineWrap(true);
+        edNome.setRows(3);
+        jScrollPane1.setViewportView(edNome);
 
-        setSize(new java.awt.Dimension(566, 219));
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(130, 110, 380, 60);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, -2, 520, 230);
+
+        setSize(new java.awt.Dimension(528, 249));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,12 +158,12 @@ public class EmDoenca extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField edCID;
-    private javax.swing.JTextField edNome;
-    private javax.swing.JTextField edNome1;
+    private javax.swing.JTextArea edNome;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbErro;
     // End of variables declaration//GEN-END:variables
     

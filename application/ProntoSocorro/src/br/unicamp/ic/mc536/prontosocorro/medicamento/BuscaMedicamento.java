@@ -7,9 +7,6 @@
 package br.unicamp.ic.mc536.prontosocorro.medicamento;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -97,6 +94,7 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         lbErro = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
+        btInserir1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Busca de Medicamentos");
@@ -233,6 +231,17 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         jPanel5.add(btVoltar);
         btVoltar.setBounds(450, 580, 100, 40);
 
+        btInserir1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btInserir1.setText("INSERIR");
+        btInserir1.setToolTipText("");
+        btInserir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btInserir1MouseClicked(evt);
+            }
+        });
+        jPanel5.add(btInserir1);
+        btInserir1.setBounds(20, 580, 110, 40);
+
         getContentPane().add(jPanel5);
         jPanel5.setBounds(0, 0, 570, 630);
 
@@ -272,6 +281,11 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btVoltarMouseClicked
 
+    private void btInserir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btInserir1MouseClicked
+        InsereMedicamento insere = new InsereMedicamento();
+        insere.setVisible(true);
+    }//GEN-LAST:event_btInserir1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -308,6 +322,7 @@ public class BuscaMedicamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btInserir;
+    private javax.swing.JButton btInserir1;
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;

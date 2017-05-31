@@ -1,4 +1,4 @@
-package br.unicamp.ic.mc536.prontosocorro.medicamento;
+package br.unicamp.ic.mc536.prontosocorro.laboratorio;
 
 import javax.swing.JOptionPane;
 
@@ -12,25 +12,25 @@ import javax.swing.JOptionPane;
  *
  * @author aluno
  */
-public class InsereMedicamento extends javax.swing.JFrame {
+public class InsereLaboratorio extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroClienteFisica
      */
     
     boolean flagUpdate;
-    Medicamento medicamento;
+    Laboratorio laboratorio;
     
-    public InsereMedicamento() {
+    public InsereLaboratorio() {
         initComponents();
         flagUpdate = false;
     }
     
-    public InsereMedicamento(Medicamento m) {
+    public InsereLaboratorio(Laboratorio l) {
         initComponents();
-        medicamento = m;
+        laboratorio = l;
         flagUpdate = true;
-       
+        inicializaCampos();
     }
 
     /**
@@ -47,18 +47,22 @@ public class InsereMedicamento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        edPrincipio_Ativo = new javax.swing.JTextField();
-        edContra_Indicacao = new javax.swing.JTextField();
+        edResponsavel = new javax.swing.JTextField();
+        edNome = new javax.swing.JTextField();
         btConfirma = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         lbErro = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        edDosagem = new javax.swing.JTextField();
+        edTelefone = new javax.swing.JFormattedTextField();
+        edTipo = new javax.swing.JTextField();
+        edRegistro = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de Medicamentos");
+        setTitle("Cadastro de Pacientes");
         setName("janela"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(null);
@@ -67,27 +71,32 @@ public class InsereMedicamento extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Cadastro de Medicamentos:");
+        jLabel2.setText("Cadastro de Laboratório");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 20, 550, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("* Principio Ativo:");
+        jLabel3.setText("* Telefone:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 110, 102, 20);
+        jLabel3.setBounds(20, 140, 80, 20);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("* Registro");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 70, 70, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("*Contra-Indicação:");
+        jLabel5.setText("* Responsável:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 170, 120, 20);
+        jLabel5.setBounds(20, 200, 100, 20);
 
-        edPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edPrincipio_Ativo);
-        edPrincipio_Ativo.setBounds(150, 110, 260, 23);
+        edResponsavel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edResponsavel);
+        edResponsavel.setBounds(130, 200, 260, 27);
 
-        edContra_Indicacao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edContra_Indicacao);
-        edContra_Indicacao.setBounds(150, 170, 260, 23);
+        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edNome);
+        edNome.setBounds(130, 100, 260, 27);
 
         btConfirma.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btConfirma.setText("CONFIRMA");
@@ -97,7 +106,7 @@ public class InsereMedicamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btConfirma);
-        btConfirma.setBounds(150, 220, 120, 40);
+        btConfirma.setBounds(150, 240, 120, 40);
 
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
@@ -107,12 +116,12 @@ public class InsereMedicamento extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btVoltar);
-        btVoltar.setBounds(280, 220, 120, 40);
+        btVoltar.setBounds(280, 240, 120, 40);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("* Campo Obrigatório");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(390, 200, 150, 17);
+        jLabel16.setBounds(400, 200, 150, 17);
 
         lbErro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbErro.setForeground(new java.awt.Color(255, 0, 51));
@@ -122,40 +131,62 @@ public class InsereMedicamento extends javax.swing.JFrame {
         lbErro.setBounds(10, 360, 360, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("* Dosagem:");
+        jLabel6.setText("* Tipo:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 140, 100, 20);
+        jLabel6.setBounds(20, 170, 100, 20);
 
-        edDosagem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edDosagem);
-        edDosagem.setBounds(150, 140, 260, 23);
+        try {
+            edTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # - #### - ####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        edTelefone.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPanel1.add(edTelefone);
+        edTelefone.setBounds(130, 140, 190, 30);
+
+        edTipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edTipo);
+        edTipo.setBounds(130, 170, 260, 27);
+        jPanel1.add(edRegistro);
+        edRegistro.setBounds(130, 70, 180, 26);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("* Nome");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(20, 100, 60, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, -2, 570, 280);
+        jPanel1.setBounds(0, -2, 570, 300);
 
         setSize(new java.awt.Dimension(566, 316));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConfirmaMouseClicked
-        String txtID;
-        int ID;
         try {
-            String principio_ativo = edPrincipio_Ativo.getText().trim();
-            String dosagem = edDosagem.getText().trim(); 
-            String contra_indicacao = edContra_Indicacao.getText().trim();
-            if((principio_ativo.equals("")) || (dosagem.equals("")) || (contra_indicacao.equals(""))){            
+            int nRegistro = Integer.parseInt(edRegistro.getText().trim());
+            String nome = edNome.getText().trim();
+            String telefone = edTelefone.getText().trim();
+            String tipo = edTipo.getText().trim();
+            String responsavel = edResponsavel.getText().trim();
+            
+            
+            if(((nome.equals("")) || (telefone.equals("")) || (tipo.equals(""))||(responsavel.equals(""))) ){            
                 lbErro.setText("Preencha os campos obrigatórios");
             } else {  
-                Medicamento medicamento = new Medicamento(0, principio_ativo, dosagem, contra_indicacao);
+                Laboratorio l = new Laboratorio(nRegistro, nome, telefone, tipo, responsavel);
                 if (!flagUpdate) {
-                    medicamento.novo();
-                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE) ;              
-                this.dispose();
+                    l.novo();
+                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    l.alterar();
+                    JOptionPane.showMessageDialog(this, "Alterado com sucesso!", "Atualização", JOptionPane.INFORMATION_MESSAGE);
                 }
+                
+                this.dispose();
             }
         } catch (NumberFormatException e) {
-            lbErro.setText("ID inválido");        
+            lbErro.setText("CPF inválido");        
         }
         
     }//GEN-LAST:event_btConfirmaMouseClicked
@@ -181,8 +212,10 @@ public class InsereMedicamento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InsereMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InsereLaboratorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
@@ -191,7 +224,7 @@ public class InsereMedicamento extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new InsereMedicamento().setVisible(true);
+            new InsereLaboratorio().setVisible(true);
         });
     }
 
@@ -200,17 +233,27 @@ public class InsereMedicamento extends javax.swing.JFrame {
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JTextField edContra_Indicacao;
-    private javax.swing.JTextField edDosagem;
-    private javax.swing.JTextField edPrincipio_Ativo;
+    private javax.swing.JTextField edNome;
+    private javax.swing.JTextField edRegistro;
+    private javax.swing.JTextField edResponsavel;
+    private javax.swing.JFormattedTextField edTelefone;
+    private javax.swing.JTextField edTipo;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbErro;
     // End of variables declaration//GEN-END:variables
     
- 
+    private void inicializaCampos() {
+        edRegistro.setText(laboratorio.getnRegistro()+"");
+        edNome.setText(laboratorio.getNome());
+        edTelefone.setText(laboratorio.getTelefone());
+        edTipo.setText(laboratorio.getTipo());
+        edResponsavel.setText(laboratorio.getResponsavel());
+    }
 }

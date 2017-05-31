@@ -8,6 +8,7 @@ package br.unicamp.ic.mc536.prontosocorro;
 
 import br.unicamp.ic.mc536.prontosocorro.consulta.BuscaConsulta;
 import br.unicamp.ic.mc536.prontosocorro.doenca.BuscaDoenca;
+import br.unicamp.ic.mc536.prontosocorro.laboratorio.BuscaLaboratorio;
 import br.unicamp.ic.mc536.prontosocorro.medico.BuscaMedico;
 import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
 import br.unicamp.ic.mc536.prontosocorro.medicamento.BuscaMedicamento;
@@ -146,6 +147,11 @@ public class TelaInicial extends javax.swing.JFrame {
         mLaboratorio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mLaboratorio.setMargin(new java.awt.Insets(5, 5, 5, 10));
         mLaboratorio.setName("mMedico"); // NOI18N
+        mLaboratorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mLaboratorioMouseClicked(evt);
+            }
+        });
         menu.add(mLaboratorio);
 
         mDoenca.setText("Doença");
@@ -199,6 +205,11 @@ public class TelaInicial extends javax.swing.JFrame {
         BuscaConsulta consulta = new BuscaConsulta();
         consulta.setVisible(true);
     }//GEN-LAST:event_mConsultaMouseClicked
+
+    private void mLaboratorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mLaboratorioMouseClicked
+        BuscaLaboratorio laboratorio = new BuscaLaboratorio();
+        laboratorio.setVisible(true);
+    }//GEN-LAST:event_mLaboratorioMouseClicked
 
 
     /**
