@@ -101,6 +101,7 @@ public class EmDoenca extends javax.swing.JFrame {
         edCID.setBounds(130, 70, 140, 27);
 
         edNome.setColumns(20);
+        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edNome.setLineWrap(true);
         edNome.setRows(3);
         jScrollPane1.setViewportView(edNome);

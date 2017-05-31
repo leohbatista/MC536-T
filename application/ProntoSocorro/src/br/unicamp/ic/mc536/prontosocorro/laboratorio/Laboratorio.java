@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Random;
 
 /**
  *
@@ -23,10 +22,9 @@ public class Laboratorio {
     private String tipo;
     private String responsavel;
     private Database d;
-    
-    public Laboratorio(String nome, String telefone, String tipo, String responsavel) {
-        Random randomGenerator = new Random();
-        this.nRegistro = randomGenerator.nextInt(1000);
+        
+    public Laboratorio(int nRegistro, String nome, String telefone, String tipo, String responsavel) {
+        this.nRegistro = nRegistro;
         this.nome = nome;
         this.telefone = telefone;
         this.tipo = tipo;
@@ -46,19 +44,19 @@ public class Laboratorio {
     
     public boolean alterar() {
         String query;       
-        query = "UPDATE paciente SET "
+        query = "UPDATE laboratorio SET "
                 + "nRegistro='" + this.nRegistro + "',"
                 + "nome='" + this.nome + "',"
                 + "telefone='" + this.telefone + "',"
                 + "tipo='" + this.tipo + "',"
-                + "reponsavel='" + this.responsavel + "';";
+                + "responsavel='" + this.responsavel + "';";
      
         return d.atualiza(query); 
     }  
     
     public boolean excluir() {
         String query;       
-        query = "DELETE FROM paciente WHERE nRegistro='" + this.nRegistro + "';";               
+        query = "DELETE FROM laboratorio WHERE nRegistro='" + this.nRegistro + "';";               
      
         return d.remove(query); 
     }
@@ -85,5 +83,56 @@ public class Laboratorio {
         d.conecta();
         return d.consulta(query);
     }
+    
+    public static boolean verificaExclusao(int nRegistro){
+        ResultSet rs = consultar(""+nRegistro,(short)1);
+        try {
+            return !rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(Laboratorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;       
+    }
+
+    public int getnRegistro() {
+        return nRegistro;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getResponsavel() {
+        return responsavel;
+    }
+
+    public void setnRegistro(int nRegistro) {
+        this.nRegistro = nRegistro;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
+    }
+
     
 }
