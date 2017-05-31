@@ -16,7 +16,8 @@ public class Database
             Class.forName("com.mysql.jdbc.Driver");
                 //con = DriverManager.getConnection("jdbc:mysql://" + local + "/" + banco, usuario, senha);
                 //con = DriverManager.getConnection("jdbc:mysql://143.106.241.1/3infd16","3infd16","3infd16");
-                con = DriverManager.getConnection("jdbc:mysql://localhost/pronto_socorro","root","plmstms14");
+                //con = DriverManager.getConnection("jdbc:mysql://localhost/pronto_socorro","root","plmstms14");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/pronto_socorro","root","123456");
                 retorno = true;
             }
             catch(ClassNotFoundException | SQLException e)

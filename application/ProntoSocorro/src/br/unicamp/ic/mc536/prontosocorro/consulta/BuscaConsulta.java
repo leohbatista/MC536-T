@@ -95,6 +95,11 @@ public class BuscaConsulta extends javax.swing.JFrame {
         chEspecialidade = new javax.swing.JCheckBox();
         chCRM = new javax.swing.JCheckBox();
         btLimpar = new javax.swing.JButton();
+        chEspecialidade1 = new javax.swing.JCheckBox();
+        edEspecialidade1 = new javax.swing.JTextField();
+        edEspecialidade2 = new javax.swing.JTextField();
+        edEspecialidade3 = new javax.swing.JTextField();
+        edEspecialidade4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         lbErro = new javax.swing.JLabel();
@@ -133,17 +138,17 @@ public class BuscaConsulta extends javax.swing.JFrame {
         edCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edCRM.setEnabled(false);
         jPanel6.add(edCRM);
-        edCRM.setBounds(120, 40, 100, 25);
+        edCRM.setBounds(120, 40, 150, 25);
 
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edNome.setEnabled(false);
         jPanel6.add(edNome);
-        edNome.setBounds(120, 70, 280, 25);
+        edNome.setBounds(120, 70, 150, 25);
 
         edEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         edEspecialidade.setEnabled(false);
         jPanel6.add(edEspecialidade);
-        edEspecialidade.setBounds(120, 100, 280, 25);
+        edEspecialidade.setBounds(190, 130, 50, 25);
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btBuscar.setText("BUSCAR");
@@ -164,7 +169,7 @@ public class BuscaConsulta extends javax.swing.JFrame {
 
         buttonGroup1.add(chNome);
         chNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chNome.setText("Nome");
+        chNome.setText("CPF");
         chNome.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chNomeItemStateChanged(evt);
@@ -175,14 +180,14 @@ public class BuscaConsulta extends javax.swing.JFrame {
 
         buttonGroup1.add(chEspecialidade);
         chEspecialidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chEspecialidade.setText("Especialidade");
+        chEspecialidade.setText("Hora");
         chEspecialidade.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chEspecialidadeItemStateChanged(evt);
             }
         });
         jPanel6.add(chEspecialidade);
-        chEspecialidade.setBounds(10, 100, 110, 24);
+        chEspecialidade.setBounds(10, 130, 110, 24);
 
         buttonGroup1.add(chCRM);
         chCRM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -211,6 +216,37 @@ public class BuscaConsulta extends javax.swing.JFrame {
         });
         jPanel6.add(btLimpar);
         btLimpar.setBounds(700, 40, 100, 30);
+
+        buttonGroup1.add(chEspecialidade1);
+        chEspecialidade1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chEspecialidade1.setText("Data");
+        chEspecialidade1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chEspecialidade1ItemStateChanged(evt);
+            }
+        });
+        jPanel6.add(chEspecialidade1);
+        chEspecialidade1.setBounds(10, 100, 110, 24);
+
+        edEspecialidade1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edEspecialidade1.setEnabled(false);
+        jPanel6.add(edEspecialidade1);
+        edEspecialidade1.setBounds(260, 100, 50, 25);
+
+        edEspecialidade2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edEspecialidade2.setEnabled(false);
+        jPanel6.add(edEspecialidade2);
+        edEspecialidade2.setBounds(120, 130, 50, 25);
+
+        edEspecialidade3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edEspecialidade3.setEnabled(false);
+        jPanel6.add(edEspecialidade3);
+        edEspecialidade3.setBounds(120, 100, 50, 25);
+
+        edEspecialidade4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edEspecialidade4.setEnabled(false);
+        jPanel6.add(edEspecialidade4);
+        edEspecialidade4.setBounds(190, 100, 50, 25);
 
         jPanel5.add(jPanel6);
         jPanel6.setBounds(20, 60, 810, 180);
@@ -365,6 +401,10 @@ public class BuscaConsulta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chCRMActionPerformed
 
+    private void chEspecialidade1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chEspecialidade1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chEspecialidade1ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -410,10 +450,15 @@ public class BuscaConsulta extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chCRM;
     private javax.swing.JCheckBox chEspecialidade;
+    private javax.swing.JCheckBox chEspecialidade1;
     private javax.swing.JCheckBox chNome;
     private javax.swing.JCheckBox chSemFiltro;
     private javax.swing.JTextField edCRM;
     private javax.swing.JTextField edEspecialidade;
+    private javax.swing.JTextField edEspecialidade1;
+    private javax.swing.JTextField edEspecialidade2;
+    private javax.swing.JTextField edEspecialidade3;
+    private javax.swing.JTextField edEspecialidade4;
     private javax.swing.JTextField edNome;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

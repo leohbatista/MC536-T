@@ -9,10 +9,7 @@ package br.unicamp.ic.mc536.prontosocorro.prescricao;
 import br.unicamp.ic.mc536.prontosocorro.Database;
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -50,24 +47,34 @@ public class Prescricao {
     
     
 
-    public static ResultSet consultar(String valor1, String valor2 ,short campo) {
+    public static ResultSet consultar(String medicamento) {
         String query;
-        switch(campo){
-            case 1:     // O filtro é a medicamento
-                query = "SELECT * FROM prescricao WHERE medicamento" + valor1 + ";";
-                break;
-            case 2:     // O filtro é o medico e paciente
-                query = "SELECT * FROM prescricao WHERE paciente ='" + valor1 + "' AND medico=" + valor2 + ";";
-                break;
-            default: 
-                query = "SELECT * FROM prescricao;";
-                break;
-        }
+        
+        query = "SELECT * FROM prescricao WHERE medicamento" + medicamento + ";";
             
         Database d = new Database();
         d.conecta();
         return d.consulta(query);
     }    
+    
+    public static ResultSet consultar() {
+        String query = "SELECT * FROM prescricao;";
+                
+        Database d = new Database();
+        d.conecta();
+        return d.consulta(query);             
+    }
+    
+    public static ResultSet consultar(String medico, String paciente, Date data, Time hora) {
+        String query;
+        query = "SELECT * FROM prescricao WHERE paciente='" + paciente + "'"
+                + " AND medico=" + medico + " AND data='" + data + "'" + " AND hora='" + hora + "'"
+                +";";
+                
+        Database d = new Database();
+        d.conecta();
+        return d.consulta(query);
+    }  
 
     public int getCRM() {
         return CRM;

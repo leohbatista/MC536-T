@@ -12,8 +12,11 @@ import br.unicamp.ic.mc536.prontosocorro.diagnostico.Diagnostico;
 import br.unicamp.ic.mc536.prontosocorro.prescricao.Prescricao;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -142,4 +145,105 @@ public class Consulta {
         d.conecta();
         return d.consulta(query);
     } 
+
+    public int getCRM() {
+        return CRM;
+    }
+
+    public void setCRM(int CRM) {
+        this.CRM = CRM;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public String getSintomas() {
+        return sintomas;
+    }
+
+    public void setSintomas(String sintomas) {
+        this.sintomas = sintomas;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public ArrayList<String> getListaDiagnosticos() {
+        ResultSet rs = Diagnostico.consultar(""+this.CRM,this.CPF,this.data,this.hora);
+        String d;
+        try {
+            while(rs.next()) {
+                d = rs.getString("doenca");
+                listaDiagnosticos.add(d);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        
+        return listaDiagnosticos;
+    }
+
+    public void setListaDiagnosticos(ArrayList<String> listaDiagnosticos) {                      
+        this.listaDiagnosticos = listaDiagnosticos;
+    }
+
+    public ArrayList<Prescricao> getListaPrescricao() {
+        ResultSet rs = Prescricao.consultar(""+this.CRM,this.CPF,this.data,this.hora);
+        Prescricao p;
+        try {
+            while(rs.next()) {
+                p = new Prescricao(
+                    rs.getInt("medico"),
+                    rs.getString("paciente"),
+                    rs.getDate("data"),
+                    rs.getTime("hora"),
+                    rs.getInt("medicamento"),
+                    rs.getString("posologia"));
+                listaPrescricao.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return listaPrescricao;
+    }
+
+    public void setListaPrescricao(ArrayList<Prescricao> listaPrescricao) {
+        this.listaPrescricao = listaPrescricao;
+    }
+    
+    
 }

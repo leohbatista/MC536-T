@@ -13,12 +13,7 @@ package br.unicamp.ic.mc536.prontosocorro.tratamento;
 
 
 import br.unicamp.ic.mc536.prontosocorro.Database;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
