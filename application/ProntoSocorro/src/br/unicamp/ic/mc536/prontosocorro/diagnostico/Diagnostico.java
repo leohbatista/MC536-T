@@ -40,27 +40,32 @@ public class Diagnostico {
     
     
 
-    public static ResultSet consultar(String valor1, String valor2 ,short campo) {
-        String query;
-        switch(campo){
-            case 1:     // O filtro é a doenca
-                query = "SELECT * FROM diagnostico WHERE doenca LIKE '" + valor1 + "%';";
-                break;
-            case 2:     // O filtro é o medico e paciente
-                query = "SELECT * FROM diagnostico WHERE paciente='" + valor1 + "'"
-                        + " AND medico=" + valor2 + ";";
-                break;
-            default: 
-                query = "SELECT * FROM diagnostico;";
-                break;
-        }
-            
+    public static ResultSet consultar(String doenca) {
+        String query = "SELECT * FROM diagnostico WHERE doenca LIKE '" + doenca + "%';";
+                           
         Database d = new Database();
         d.conecta();
         return d.consulta(query);
     }    
     
-    
+    public static ResultSet consultar() {
+        String query = "SELECT * FROM diagnostico;";
+                
+        Database d = new Database();
+        d.conecta();
+        return d.consulta(query);             
+    }
+
+    public static ResultSet consultar(String medico, String paciente, Date data, Time hora) {
+        String query;
+        query = "SELECT * FROM diagnostico WHERE paciente='" + paciente + "'"
+                + " AND medico=" + medico + " AND data='" + data + "'" + " AND hora='" + hora + "'"
+                +";";
+                
+        Database d = new Database();
+        d.conecta();
+        return d.consulta(query);
+    }  
     
 
 }
