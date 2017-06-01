@@ -41,7 +41,7 @@ public class Prescricao {
     public boolean novo() {               
         String query;        
         query = "INSERT INTO prescricao (medico, paciente, data, hora, medicamento,posologia) VALUES ("
-                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.medicamento +"','" + this.posologia +"');";      
+                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.medicamento.getId_medicamento() +"','" + this.posologia +"');";      
         
         return d.insere(query);
     }
@@ -68,7 +68,7 @@ public class Prescricao {
     
     public static ResultSet consultar(String medico, String paciente, Date data, Time hora) {
         String query;
-        query = "SELECT * FROM prescricao WHERE paciente='" + paciente + "'"
+        query = "SELECT p.*,m.nome,m.dosagem FROM prescricao WHERE paciente='" + paciente + "'"
                 + " AND medico=" + medico + " AND data='" + data + "'" + " AND hora='" + hora + "'"
                 +";";
                 

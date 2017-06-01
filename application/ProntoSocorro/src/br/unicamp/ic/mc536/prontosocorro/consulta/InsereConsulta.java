@@ -2,7 +2,6 @@ package br.unicamp.ic.mc536.prontosocorro.consulta;
 
 import br.unicamp.ic.mc536.prontosocorro.prescricao.Prescricao;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +30,8 @@ public class InsereConsulta extends javax.swing.JFrame {
     public InsereConsulta() {
         initComponents();
         flagView = false;
+        atualizaTabelaDiagnostico();
+        atualizaTabelaPrescricao();
     }
     
     public InsereConsulta(Consulta c) {
@@ -38,6 +39,8 @@ public class InsereConsulta extends javax.swing.JFrame {
         consulta = c;
         flagView = true;
         inicializaCampos();
+        atualizaTabelaDiagnostico();
+        atualizaTabelaPrescricao();
     }
 
     /**
@@ -440,7 +443,7 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btPacienteMouseClicked
 
     private void btDelDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelDiagnosticoMouseClicked
-        // TODO add your handling code here:
+        atualizaTabelaDiagnostico();
     }//GEN-LAST:event_btDelDiagnosticoMouseClicked
 
     private void btMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btMedicoMouseClicked
@@ -448,15 +451,15 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btMedicoMouseClicked
 
     private void btAddDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddDiagnosticoMouseClicked
-        // TODO add your handling code here:
+        atualizaTabelaDiagnostico();
     }//GEN-LAST:event_btAddDiagnosticoMouseClicked
 
     private void btAddPrescricaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddPrescricaoMouseClicked
-        // TODO add your handling code here:
+        atualizaTabelaPrescricao();
     }//GEN-LAST:event_btAddPrescricaoMouseClicked
 
     private void btDelPrescriçãoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelPrescriçãoMouseClicked
-        // TODO add your handling code here:
+        atualizaTabelaPrescricao();
     }//GEN-LAST:event_btDelPrescriçãoMouseClicked
 
     /**
@@ -578,7 +581,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         taObservacoes.setText(consulta.getDiagnostico());
     }
     
-    protected void atualizaTabelaDiagnostico(ResultSet rs){
+    protected void atualizaTabelaDiagnostico(){
         DefaultTableModel modelotabela = (DefaultTableModel) tbDiagnostico.getModel();
         modelotabela.setColumnCount(6);
         modelotabela.setRowCount(0);
@@ -596,7 +599,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             
     }
     
-    protected void atualizaTabelaPrescricao(ResultSet rs){
+    protected void atualizaTabelaPrescricao(){
         DefaultTableModel modelotabela = (DefaultTableModel) tbPrescricao.getModel();
         modelotabela.setColumnCount(6);
         modelotabela.setRowCount(0);

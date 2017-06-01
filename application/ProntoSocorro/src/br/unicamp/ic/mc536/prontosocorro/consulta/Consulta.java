@@ -9,6 +9,7 @@ package br.unicamp.ic.mc536.prontosocorro.consulta;
 
 import br.unicamp.ic.mc536.prontosocorro.Database;
 import br.unicamp.ic.mc536.prontosocorro.diagnostico.Diagnostico;
+import br.unicamp.ic.mc536.prontosocorro.medicamento.Medicamento;
 import br.unicamp.ic.mc536.prontosocorro.prescricao.Prescricao;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -268,7 +269,7 @@ public class Consulta {
                     rs.getString("paciente"),
                     rs.getDate("data"),
                     rs.getTime("hora"),
-                   // rs.getInt("medicamento"),
+                    new Medicamento(rs.getInt("medicamento"),rs.getString("nome"),rs.getString("dosagem"),""),
                     rs.getString("posologia"));
                 listaPrescricao.add(p);
             }
