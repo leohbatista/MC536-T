@@ -7,6 +7,7 @@ package br.unicamp.ic.mc536.prontosocorro.prescricao;
 
 
 import br.unicamp.ic.mc536.prontosocorro.Database;
+import br.unicamp.ic.mc536.prontosocorro.medicamento.Medicamento;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Time;
@@ -21,12 +22,12 @@ public class Prescricao {
    private String CPF;
    private Date data;
    private Time hora;
-   private int medicamento;
+   private Medicamento medicamento;
    private String posologia;
    
     private Database d;
 
-    public Prescricao(int CRM, String CPF, Date data, Time hora, int medicamento, String posologia) {
+    public Prescricao(int CRM, String CPF, Date data, Time hora, Medicamento medicamento, String posologia) {
         this.CRM = CRM;
         this.CPF = CPF;
         this.data = data;
@@ -50,7 +51,7 @@ public class Prescricao {
     public static ResultSet consultar(String medicamento) {
         String query;
         
-        query = "SELECT * FROM prescricao WHERE medicamento" + medicamento + ";";
+        query = "SELECT * FROM prescricao WHERE medicamento=" + medicamento + ";";
             
         Database d = new Database();
         d.conecta();
@@ -108,20 +109,20 @@ public class Prescricao {
         this.hora = hora;
     }
 
-    public int getMedicamento() {
-        return medicamento;
-    }
-
-    public void setMedicamento(int medicamento) {
-        this.medicamento = medicamento;
-    }
-
     public String getPosologia() {
         return posologia;
     }
 
     public void setPosologia(String posologia) {
         this.posologia = posologia;
+    }
+
+    public Medicamento getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(Medicamento medicamento) {
+        this.medicamento = medicamento;
     }
     
     

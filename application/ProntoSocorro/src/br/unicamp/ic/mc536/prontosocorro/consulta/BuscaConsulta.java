@@ -5,8 +5,12 @@
  */
 
 package br.unicamp.ic.mc536.prontosocorro.consulta;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -71,6 +75,19 @@ public class BuscaConsulta extends javax.swing.JFrame {
                     throw new InvalidDateTimeException();
                 }
                 
+                String data = ""+ano;
+                if (mes > 0 && mes < 10) {
+                    data += "-0" + mes;
+                } else {
+                    data += "-" + mes;
+                }
+                
+                if (dia > 0 && dia < 10) {
+                    data += "-0" + dia;
+                } else {
+                    data += "-" + dia;
+                }
+                
                 String horario = "";
                 if (hora >= 0 && hora < 10) {
                     horario += "0" + hora + ":";
@@ -84,14 +101,11 @@ public class BuscaConsulta extends javax.swing.JFrame {
                     horario += minuto + ":";
                 }
                 horario += "00";
-                
-                String data = ano + "-" + mes + "-" + dia;                
+                               
                 atualizaTabela(Consulta.consultar(data,horario,(short)2));
                 lbErro.setText("");
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | InvalidDateTimeException e) {
                 lbErro.setText("Data e/ou hora inválidas!");
-            } catch (InvalidDateTimeException e) {
-                  lbErro.setText("Data e/ou hora inválidas!");  
             }
         }
     }
@@ -425,21 +439,33 @@ public class BuscaConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarMouseClicked
 
     private void btVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVisualizarMouseClicked
-        /* if(tabela.getSelectedRowCount() != 0){
+        if(tabela.getSelectedRowCount() != 0){
             int crm = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(),0).toString());
-            ResultSet rs = Medico.consultar(""+crm,(short)1);
+            String cpf = tabela.getValueAt(tabela.getSelectedRow(),2).toString();
+            String data = tabela.getValueAt(tabela.getSelectedRow(),4).toString();
+            String hora = tabela.getValueAt(tabela.getSelectedRow(),5).toString();
+            
+            Consulta consulta = new Consulta(crm, cpf, Date.valueOf(""), Time.valueOf(hora), "", "", "");
+            consulta.setDataConvertida(data);
+            
+            ResultSet rs = Consulta.consultar(""+crm,cpf,
+                    consulta.getData().toString(),consulta.getHora().toString());
             try {
                 lbErro.setText("");
                 rs.next();
-                Medico medico = new Medico(crm, rs.getString("nome"), rs.getString("especialidade"));
-                InsereMedico alt = new InsereMedico(medico);
-                alt.setVisible(true);
+                consulta.setDiagnostico(rs.getString("diagnostico"));
+                consulta.setSintomas(rs.getString("sintomas"));
+                consulta.setObservacoes(rs.getString("observacoes"));
+                consulta.getListaDiagnosticosSelect();
+                consulta.getListaPrescricaoSelect();
+                InsereConsulta view = new InsereConsulta(consulta);
+                view.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(BuscaConsulta.class.getName()).log(Level.SEVERE, null, ex);
             }   
         } else {
             lbErro.setText("Selecione uma linha para alterar");
-        }*/
+        }
     }//GEN-LAST:event_btVisualizarMouseClicked
 
     private void chDataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chDataItemStateChanged

@@ -1,7 +1,13 @@
 package br.unicamp.ic.mc536.prontosocorro.consulta;
 
-import br.unicamp.ic.mc536.prontosocorro.medico.*;
+import br.unicamp.ic.mc536.prontosocorro.prescricao.Prescricao;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -49,7 +55,6 @@ public class InsereConsulta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        edPaciente = new javax.swing.JTextField();
         edMinuto = new javax.swing.JTextField();
         btConfirma = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
@@ -88,6 +93,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         lbMedico = new javax.swing.JLabel();
+        edPaciente = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Médicos");
@@ -112,10 +118,6 @@ public class InsereConsulta extends javax.swing.JFrame {
         jLabel4.setText("* Hora:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(760, 110, 60, 20);
-
-        edPaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(edPaciente);
-        edPaciente.setBounds(100, 110, 140, 25);
 
         edMinuto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMinuto);
@@ -153,6 +155,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         jPanel1.add(lbErro);
         lbErro.setBounds(30, 690, 360, 30);
 
+        edMedico.setEditable(false);
         edMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMedico);
         edMedico.setBounds(100, 80, 140, 25);
@@ -347,6 +350,17 @@ public class InsereConsulta extends javax.swing.JFrame {
         jPanel1.add(lbMedico);
         lbMedico.setBounds(370, 80, 370, 20);
 
+        edPaciente.setEditable(false);
+        try {
+            edPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        edPaciente.setFocusable(false);
+        edPaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(edPaciente);
+        edPaciente.setBounds(100, 110, 140, 30);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1020, 780);
 
@@ -359,31 +373,66 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarMouseClicked
 
     private void btConfirmaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btConfirmaMouseClicked
-
-        /*String txtCRM;
-        int CRM;
+                        
         try {
-            txtCRM = edMinuto.getText().trim();
-            CRM = Integer.parseInt(txtCRM);
-            String nome = edPaciente.getText().trim();
-            //String especialidade = edEspecialidade.getText().trim();
-            if((txtCRM.equals("")) || (nome.equals("")) || (especialidade.equals(""))){
-                lbErro.setText("Preencha os campos obrigatórios");
+            int medico = Integer.parseInt(edMedico.getText().trim());
+            String paciente = edPaciente.getText().trim();
+            int ano,mes,dia,hora,minuto;
+            
+            ano = Integer.parseInt(edAno.getText());
+            mes = Integer.parseInt(edMes.getText());
+            dia = Integer.parseInt(edDia.getText());
+            hora = Integer.parseInt(edHora.getText());
+            minuto = Integer.parseInt(edMinuto.getText());
+            
+            if(medico == 0) {
+                lbErro.setText("Selecione um médico");
+            } else if (paciente.equals("")) {
+                lbErro.setText("Selecione um paciente");
+            } else if (!Consulta.validaData(ano,mes,dia)) {                   
+                lbErro.setText("Data Inválida");
+            } else if (!Consulta.validaHora(hora,minuto) 
+                    || edHora.getText().equals("")|| edMinuto.getText().equals("")) {                   
+                lbErro.setText("Hora Inválida");
             } else {
-                Medico medico = new Medico(CRM, nome, especialidade);
-                if (!flagView) {
-                    medico.novo();
-                    JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                String data = ""+ano;
+                if (mes > 0 && mes < 10) {
+                    data += "-0" + mes;
                 } else {
-                    medico.alterar();
-                    JOptionPane.showMessageDialog(this, "Alterado com sucesso!", "Atualização", JOptionPane.INFORMATION_MESSAGE);
+                    data += "-" + mes;
                 }
+                
+                if (dia > 0 && dia < 10) {
+                    data += "-0" + dia;
+                } else {
+                    data += "-" + dia;
+                }
+                
+                String horario = "";
+                if (hora >= 0 && hora < 10) {
+                    horario += "0" + hora + ":";
+                } else {
+                    horario += hora + ":";
+                }
+                
+                if (minuto >= 0 && minuto < 10) {
+                    horario += "0" + minuto + ":";
+                } else {
+                    horario += minuto + ":";
+                }
+                horario += "00";                             
+                
+                Consulta consulta = new Consulta(medico, paciente, Date.valueOf(data), Time.valueOf(horario),
+                        taDiagnostico.getText(), taSintomas.getText(),taObservacoes.getText());                
+                consulta.novo();
+                JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                               
 
                 this.dispose();
             }
         } catch (NumberFormatException e) {
-            lbErro.setText("CRM inválido");
-        }*/
+            lbErro.setText("Data e hora precisam ser numéricos");
+        }
     }//GEN-LAST:event_btConfirmaMouseClicked
 
     private void btPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btPacienteMouseClicked
@@ -460,7 +509,7 @@ public class InsereConsulta extends javax.swing.JFrame {
     private javax.swing.JTextField edMedico;
     private javax.swing.JTextField edMes;
     private javax.swing.JTextField edMinuto;
-    private javax.swing.JTextField edPaciente;
+    private javax.swing.JFormattedTextField edPaciente;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -510,6 +559,8 @@ public class InsereConsulta extends javax.swing.JFrame {
         btAddPrescricao.setEnabled(false);
         btDelDiagnostico.setEnabled(false);
         btDelPrescrição.setEnabled(false);
+        btConfirma.setEnabled(false);
+        
         
         edMedico.setText(""+consulta.getCRM());
         edPaciente.setText(consulta.getCPF());
@@ -525,5 +576,44 @@ public class InsereConsulta extends javax.swing.JFrame {
         taDiagnostico.setText(consulta.getDiagnostico());
         taSintomas.setText(consulta.getDiagnostico());
         taObservacoes.setText(consulta.getDiagnostico());
+    }
+    
+    protected void atualizaTabelaDiagnostico(ResultSet rs){
+        DefaultTableModel modelotabela = (DefaultTableModel) tbDiagnostico.getModel();
+        modelotabela.setColumnCount(6);
+        modelotabela.setRowCount(0);
+
+        tbDiagnostico.getColumnModel().getColumn(0).setHeaderValue("CID");
+        int linha = 0;
+        
+        ArrayList<String> diag = consulta.getListaDiagnosticos();
+        
+        for (Iterator iterator = diag.iterator(); iterator.hasNext(); linha++) {
+            String next = (String) iterator.next();
+            modelotabela.addRow(new String[modelotabela.getColumnCount()]);
+            modelotabela.setValueAt(next, linha, 0);                     
+        }
+            
+    }
+    
+    protected void atualizaTabelaPrescricao(ResultSet rs){
+        DefaultTableModel modelotabela = (DefaultTableModel) tbPrescricao.getModel();
+        modelotabela.setColumnCount(6);
+        modelotabela.setRowCount(0);
+
+        tbPrescricao.getColumnModel().getColumn(0).setHeaderValue("Princípio Ativo");
+        tbPrescricao.getColumnModel().getColumn(0).setHeaderValue("Dosagem");
+        tbPrescricao.getColumnModel().getColumn(0).setHeaderValue("Posologia");
+        int linha = 0;
+        
+        ArrayList<Prescricao> diag = consulta.getListaPrescricao();
+        
+        for (Iterator iterator = diag.iterator(); iterator.hasNext(); linha++) {
+            Prescricao next = (Prescricao) iterator.next();
+            modelotabela.addRow(new String[modelotabela.getColumnCount()]);
+            modelotabela.setValueAt(next.getMedicamento().getPrincipio_ativo(), linha, 0);                     
+            modelotabela.setValueAt(next.getMedicamento().getDosagem(), linha, 1);
+            modelotabela.setValueAt(next.getPosologia(), linha, 2);            
+        }
     }
 }

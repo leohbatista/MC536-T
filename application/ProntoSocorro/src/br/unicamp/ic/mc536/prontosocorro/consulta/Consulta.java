@@ -36,11 +36,19 @@ public class Consulta {
    
     private Database d;
 
-    public Consulta(int CRM, String nome, String especialidade) {
+    public Consulta(int CRM, String CPF, Date data, Time hora, String diagnostico, String sintomas, String observacoes) {
+        this.CRM = CRM;
+        this.CPF = CPF;
+        this.data = data;
+        this.hora = hora;
+        this.diagnostico = diagnostico;
+        this.sintomas = sintomas;
+        this.observacoes = observacoes;
         
         d = new Database();
-        d.conecta();   
+        d.conecta(); 
     }
+
 
     public boolean novo() {               
         String query;        
@@ -224,6 +232,14 @@ public class Consulta {
     }
 
     public ArrayList<String> getListaDiagnosticos() {
+        return listaDiagnosticos;
+    }
+
+    public ArrayList<Prescricao> getListaPrescricao() {
+        return listaPrescricao;
+    }    
+    
+    public ArrayList<String> getListaDiagnosticosSelect() {
         ResultSet rs = Diagnostico.consultar(""+this.CRM,this.CPF,this.data,this.hora);
         String d;
         try {
@@ -242,7 +258,7 @@ public class Consulta {
         this.listaDiagnosticos = listaDiagnosticos;
     }
 
-    public ArrayList<Prescricao> getListaPrescricao() {
+    public ArrayList<Prescricao> getListaPrescricaoSelect() {
         ResultSet rs = Prescricao.consultar(""+this.CRM,this.CPF,this.data,this.hora);
         Prescricao p;
         try {
@@ -252,7 +268,7 @@ public class Consulta {
                     rs.getString("paciente"),
                     rs.getDate("data"),
                     rs.getTime("hora"),
-                    rs.getInt("medicamento"),
+                   // rs.getInt("medicamento"),
                     rs.getString("posologia"));
                 listaPrescricao.add(p);
             }
@@ -292,5 +308,27 @@ public class Consulta {
         return true;
     }
     
+    public String getDataConvertida() {
+        String nData;
+        String [] parts;
+        
+        parts = data.toString().split("-");
+        
+        nData = parts[2] + "/" + parts[1] + "/" + parts[0];
+        
+        return nData;
+    }
+
+    public void setDataConvertida(String data) {
+        String nData;
+        String [] parts;
+        
+        parts = data.split("/");
+        
+        nData = parts[2] + "-" + parts[1] + "-" + parts[0];
+        
+        this.data = Date.valueOf(nData);
+    }
+
     
 }

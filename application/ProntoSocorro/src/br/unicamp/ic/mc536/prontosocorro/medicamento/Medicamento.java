@@ -61,9 +61,38 @@ public class Medicamento {
         d.conecta();
         return d.consulta(query);
     }    
-    
-    
-    
+
+    public int getId_medicamento() {
+        return id_medicamento;
+    }
+
+    public void setId_medicamento(int id_medicamento) {
+        this.id_medicamento = id_medicamento;
+    }
+
+    public String getPrincipio_ativo() {
+        return principio_ativo;
+    }
+
+    public void setPrincipio_ativo(String principio_ativo) {
+        this.principio_ativo = principio_ativo;
+    }
+
+    public String getDosagem() {
+        return dosagem;
+    }
+
+    public void setDosagem(String dosagem) {
+        this.dosagem = dosagem;
+    }
+
+    public String getContra_indicacao() {
+        return contra_indicacao;
+    }
+
+    public void setContra_indicacao(String contra_indicacao) {
+        this.contra_indicacao = contra_indicacao;
+    }            
 
 }
 
