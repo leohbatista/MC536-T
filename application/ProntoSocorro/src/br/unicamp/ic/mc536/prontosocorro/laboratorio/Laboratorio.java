@@ -45,11 +45,11 @@ public class Laboratorio {
     public boolean alterar() {
         String query;       
         query = "UPDATE laboratorio SET "
-                + "nRegistro='" + this.nRegistro + "',"
                 + "nome='" + this.nome + "',"
                 + "telefone='" + this.telefone + "',"
                 + "tipo='" + this.tipo + "',"
-                + "responsavel='" + this.responsavel + "';";
+                + "responsavel='" + this.responsavel + "' "
+                + "where nRegistro='" + this.nRegistro + "';";
      
         return d.atualiza(query); 
     }  

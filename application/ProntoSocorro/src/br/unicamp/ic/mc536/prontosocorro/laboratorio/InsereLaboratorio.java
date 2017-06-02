@@ -255,5 +255,6 @@ public class InsereLaboratorio extends javax.swing.JFrame {
         edTelefone.setText(laboratorio.getTelefone());
         edTipo.setText(laboratorio.getTipo());
         edResponsavel.setText(laboratorio.getResponsavel());
+        edRegistro.setEditable(false);
     }
 }
