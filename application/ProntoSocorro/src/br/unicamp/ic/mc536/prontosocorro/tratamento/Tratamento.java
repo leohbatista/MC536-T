@@ -59,7 +59,7 @@ public class Tratamento {
                 break;
             case 3:     // O filtro é a doenca
                 query = "SELECT t.*,m.principio_ativo FROM tratamento t INNER JOIN medicamento m "
-                + "ON t.medicamento = m.id_medicamento WHERE doenca LIKE ='"+ valor +"'%;";
+                + "ON t.medicamento = m.id_medicamento WHERE doenca LIKE '"+ valor +"%';";
                 break;
             default: 
                 query = "SELECT t.*,m.principio_ativo FROM tratamento t INNER JOIN medicamento m "
@@ -104,7 +104,7 @@ public class Tratamento {
     public boolean alterar() {
         String query;       
         query = "UPDATE tratamento SET "
-                + "descricao='" + this.descricao + "',"             
+                + "descricao='" + this.descricao + "'"             
                 + " WHERE medicamento=" + this.medicamento + " "
                 + "AND doenca='"+ this.doenca +"';";
      
