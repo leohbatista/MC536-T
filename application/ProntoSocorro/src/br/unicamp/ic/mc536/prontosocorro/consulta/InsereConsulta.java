@@ -93,7 +93,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         btMedico = new javax.swing.JButton();
         btAddDiagnostico = new javax.swing.JButton();
         btAddPrescricao = new javax.swing.JButton();
-        btDelPrescrição = new javax.swing.JButton();
+        btDelPrescricao = new javax.swing.JButton();
         lbPaciente = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -132,7 +132,7 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         edMinuto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMinuto);
-        edMinuto.setBounds(880, 110, 40, 23);
+        edMinuto.setBounds(880, 110, 40, 25);
 
         btConfirma.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btConfirma.setText("CONFIRMA");
@@ -168,23 +168,23 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         edMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMedico);
-        edMedico.setBounds(100, 80, 140, 23);
+        edMedico.setBounds(100, 80, 140, 25);
 
         edDia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edDia);
-        edDia.setBounds(820, 80, 40, 23);
+        edDia.setBounds(820, 80, 40, 25);
 
         edMes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMes);
-        edMes.setBounds(880, 80, 40, 23);
+        edMes.setBounds(880, 80, 40, 25);
 
         edAno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edAno);
-        edAno.setBounds(940, 80, 50, 23);
+        edAno.setBounds(940, 80, 50, 25);
 
         edHora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edHora);
-        edHora.setBounds(820, 110, 40, 23);
+        edHora.setBounds(820, 110, 40, 25);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("* Médico:");
@@ -330,15 +330,15 @@ public class InsereConsulta extends javax.swing.JFrame {
         jPanel1.add(btAddPrescricao);
         btAddPrescricao.setBounds(310, 400, 110, 30);
 
-        btDelPrescrição.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btDelPrescrição.setText("Remover");
-        btDelPrescrição.addMouseListener(new java.awt.event.MouseAdapter() {
+        btDelPrescricao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btDelPrescricao.setText("Remover");
+        btDelPrescricao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btDelPrescriçãoMouseClicked(evt);
+                btDelPrescricaoMouseClicked(evt);
             }
         });
-        jPanel1.add(btDelPrescrição);
-        btDelPrescrição.setBounds(420, 400, 110, 30);
+        jPanel1.add(btDelPrescricao);
+        btDelPrescricao.setBounds(420, 400, 110, 30);
 
         lbPaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lbPaciente);
@@ -452,9 +452,11 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btPacienteMouseClicked
 
     private void btDelDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelDiagnosticoMouseClicked
-        int d = tbDiagnostico.getSelectedRow();
-        this.consulta.getListaDiagnosticos().remove(d);
-        atualizaTabelaDiagnostico();
+        if(btDelPrescricao.isEnabled()) {
+            int d = tbDiagnostico.getSelectedRow();
+            this.consulta.getListaDiagnosticos().remove(d);
+            atualizaTabelaDiagnostico();
+        }
     }//GEN-LAST:event_btDelDiagnosticoMouseClicked
 
     private void btMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btMedicoMouseClicked
@@ -462,20 +464,26 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btMedicoMouseClicked
 
     private void btAddDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddDiagnosticoMouseClicked
-        GetDoenca doenca = new GetDoenca(this);
-        doenca.setVisible(true);
+        if(btAddDiagnostico.isEnabled()) {
+            GetDoenca doenca = new GetDoenca(this);
+            doenca.setVisible(true);
+        }
     }//GEN-LAST:event_btAddDiagnosticoMouseClicked
 
     private void btAddPrescricaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddPrescricaoMouseClicked
-        GetMedicamento med = new GetMedicamento(this);
-        med.setVisible(true);        
+        if(btAddPrescricao.isEnabled()) {
+            GetMedicamento med = new GetMedicamento(this);
+            med.setVisible(true);
+        }
     }//GEN-LAST:event_btAddPrescricaoMouseClicked
 
-    private void btDelPrescriçãoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelPrescriçãoMouseClicked
-        int p = tbPrescricao.getSelectedRow();
-        this.consulta.getListaPrescricao().remove(p);
-        atualizaTabelaPrescricao();
-    }//GEN-LAST:event_btDelPrescriçãoMouseClicked
+    private void btDelPrescricaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelPrescricaoMouseClicked
+        if(btDelPrescricao.isEnabled()) {
+            int p = tbPrescricao.getSelectedRow();
+            this.consulta.getListaPrescricao().remove(p);
+            atualizaTabelaPrescricao();            
+        }
+    }//GEN-LAST:event_btDelPrescricaoMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         atualizaTabelaPrescricao();
@@ -519,7 +527,7 @@ public class InsereConsulta extends javax.swing.JFrame {
     private javax.swing.JButton btAddPrescricao;
     private javax.swing.JButton btConfirma;
     private javax.swing.JButton btDelDiagnostico;
-    private javax.swing.JButton btDelPrescrição;
+    private javax.swing.JButton btDelPrescricao;
     private javax.swing.JButton btMedico;
     private javax.swing.JButton btPaciente;
     private javax.swing.JButton btVoltar;
@@ -580,7 +588,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         btAddDiagnostico.setEnabled(false);
         btAddPrescricao.setEnabled(false);
         btDelDiagnostico.setEnabled(false);
-        btDelPrescrição.setEnabled(false);
+        btDelPrescricao.setEnabled(false);
         btConfirma.setEnabled(false);
         
         

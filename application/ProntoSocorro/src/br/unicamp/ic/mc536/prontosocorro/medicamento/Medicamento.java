@@ -47,7 +47,7 @@ public class Medicamento {
                 query= "SELECT * FROM medicamento WHERE id_medicamento = " + valor + ";";
                 break;
             case 2:     // O filtro é o campo principio ativo
-                query= "SELECT * FROM medicamento WHERE principio_ativo LIKE '" + valor + "%';";
+                query= "SELECT * FROM medicamento WHERE principio_ativo LIKE '%" + valor + "%';";
                 break;
             default: 
                 query = "SELECT * FROM medicamento;";

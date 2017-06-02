@@ -12,6 +12,7 @@ import br.unicamp.ic.mc536.prontosocorro.laboratorio.BuscaLaboratorio;
 import br.unicamp.ic.mc536.prontosocorro.medico.BuscaMedico;
 import br.unicamp.ic.mc536.prontosocorro.paciente.BuscaPaciente;
 import br.unicamp.ic.mc536.prontosocorro.medicamento.BuscaMedicamento;
+import br.unicamp.ic.mc536.prontosocorro.tratamento.BuscaTratamento;
 
 /**
  *
@@ -226,7 +227,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mLaboratorioMouseClicked
 
     private void mTratamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mTratamentoMouseClicked
-        // TODO add your handling code here:
+        BuscaTratamento tratamento = new BuscaTratamento();
+        tratamento.setVisible(true);
     }//GEN-LAST:event_mTratamentoMouseClicked
 
 
