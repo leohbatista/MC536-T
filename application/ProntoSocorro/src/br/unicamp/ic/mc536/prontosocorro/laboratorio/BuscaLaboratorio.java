@@ -209,6 +209,11 @@ public class BuscaLaboratorio extends javax.swing.JFrame {
                 chRegistroItemStateChanged(evt);
             }
         });
+        chRegistro.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chRegistroStateChanged(evt);
+            }
+        });
         chRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chRegistroActionPerformed(evt);
@@ -387,6 +392,10 @@ public class BuscaLaboratorio extends javax.swing.JFrame {
     private void chRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chRegistroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chRegistroActionPerformed
+
+    private void chRegistroStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chRegistroStateChanged
+        edRegistro.setEnabled(chRegistro.isSelected());
+    }//GEN-LAST:event_chRegistroStateChanged
 
     /**
      * @param args the command line arguments
