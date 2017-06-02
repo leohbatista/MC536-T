@@ -98,7 +98,7 @@ public class EmDoenca extends javax.swing.JFrame {
 
         edCID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edCID);
-        edCID.setBounds(130, 70, 140, 27);
+        edCID.setBounds(130, 70, 140, 25);
 
         edNome.setColumns(20);
         edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -110,9 +110,9 @@ public class EmDoenca extends javax.swing.JFrame {
         jScrollPane1.setBounds(130, 110, 380, 60);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, -2, 520, 230);
+        jPanel1.setBounds(0, -2, 540, 230);
 
-        setSize(new java.awt.Dimension(528, 249));
+        setSize(new java.awt.Dimension(546, 265));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

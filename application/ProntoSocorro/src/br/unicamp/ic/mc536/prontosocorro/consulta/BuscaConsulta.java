@@ -129,9 +129,9 @@ public class BuscaConsulta extends javax.swing.JFrame {
                       modelotabela.setValueAt(rs.getString("medico"), linha, 0);
                       modelotabela.setValueAt(rs.getString("nmedico"), linha, 1);
                       modelotabela.setValueAt(rs.getString("paciente"), linha, 2);
-                      modelotabela.setValueAt(rs.getString("npaciente"), linha, 0);
-                      modelotabela.setValueAt(rs.getString("data"), linha, 0);
-                      modelotabela.setValueAt(rs.getString("hora"), linha, 0);
+                      modelotabela.setValueAt(rs.getString("npaciente"), linha, 3);
+                      modelotabela.setValueAt(rs.getString("data"), linha, 4);
+                      modelotabela.setValueAt(rs.getString("hora"), linha, 5);
                       linha++;
                   }
             }
@@ -362,7 +362,7 @@ public class BuscaConsulta extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btInserir);
-        btInserir.setBounds(20, 650, 110, 40);
+        btInserir.setBounds(20, 650, 140, 40);
 
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
@@ -383,7 +383,7 @@ public class BuscaConsulta extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btVisualizar);
-        btVisualizar.setBounds(140, 650, 140, 40);
+        btVisualizar.setBounds(170, 650, 140, 40);
 
         getContentPane().add(jPanel5);
         jPanel5.setBounds(0, 0, 850, 700);
@@ -445,11 +445,11 @@ public class BuscaConsulta extends javax.swing.JFrame {
             String data = tabela.getValueAt(tabela.getSelectedRow(),4).toString();
             String hora = tabela.getValueAt(tabela.getSelectedRow(),5).toString();
             
-            Consulta consulta = new Consulta(crm, cpf, Date.valueOf(""), Time.valueOf(hora), "", "", "");
-            consulta.setDataConvertida(data);
+            Consulta consulta = new Consulta(crm, cpf, Date.valueOf(data), Time.valueOf(hora), "", "", "");
+            //consulta.setDataConvertida(data);
             
             ResultSet rs = Consulta.consultar(""+crm,cpf,
-                    consulta.getData().toString(),consulta.getHora().toString());
+                    data,hora);
             try {
                 lbErro.setText("");
                 rs.next();

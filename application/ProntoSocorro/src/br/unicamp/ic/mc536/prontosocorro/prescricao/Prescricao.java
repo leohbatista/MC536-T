@@ -68,10 +68,11 @@ public class Prescricao {
     
     public static ResultSet consultar(String medico, String paciente, Date data, Time hora) {
         String query;
-        query = "SELECT p.*,m.nome,m.dosagem FROM prescricao WHERE paciente='" + paciente + "'"
-                + " AND medico=" + medico + " AND data='" + data + "'" + " AND hora='" + hora + "'"
+        query = "SELECT p.*,m.principio_ativo,m.dosagem FROM prescricao p INNER JOIN "
+                + "medicamento m ON p.medicamento = m.id_medicamento WHERE paciente='" + paciente + "'"
+                + " AND medico=" + medico + " AND data='" + data.toString() + "'" + " AND hora='" + hora.toString() + "'"
                 +";";
-                
+        
         Database d = new Database();
         d.conecta();
         return d.consulta(query);

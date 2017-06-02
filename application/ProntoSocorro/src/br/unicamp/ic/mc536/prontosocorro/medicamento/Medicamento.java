@@ -7,9 +7,6 @@ package br.unicamp.ic.mc536.prontosocorro.medicamento;
 
 import br.unicamp.ic.mc536.prontosocorro.Database;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

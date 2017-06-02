@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.unicamp.ic.mc536.prontosocorro.medicamento;
+package br.unicamp.ic.mc536.prontosocorro.doenca;
+import br.unicamp.ic.mc536.prontosocorro.consulta.InsereConsulta;
+import br.unicamp.ic.mc536.prontosocorro.prescricao.Prescricao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -14,52 +18,52 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Administrador
  */
-public class BuscaMedicamento extends javax.swing.JFrame {
+public class GetDoenca extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsFuncionario
      */
-    public BuscaMedicamento() {
+    
+    InsereConsulta ret;
+    
+    public GetDoenca(InsereConsulta ins) {
         initComponents();
+        this.ret = ins;
+    }
+
+    private GetDoenca() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     private void search() {
         if (chSemFiltro.isSelected()){
-            atualizaTabela(Medicamento.consultar("",(short)-1));
+            atualizaTabela(Doenca.consultar("",(short)-1));
             lbErro.setText("");
-        } else if(chID.isSelected()) {
-            try {
-                int id = Integer.parseInt(edID.getText());
-                atualizaTabela(Medicamento.consultar(""+id,(short)1));
-                lbErro.setText("");
-            } catch (NumberFormatException e) {
-                lbErro.setText("O código deve ser um valor numérico!");
-            }
-        } else if(chPrincipio_Ativo.isSelected()) {
-            atualizaTabela(Medicamento.consultar(edPrincipio_Ativo.getText(),(short)2));
+        } else if(chCID.isSelected()) {
+            atualizaTabela(Doenca.consultar(edCID.getText(),(short)1));
+            lbErro.setText("");
+        } else if(chNome.isSelected()) {
+            atualizaTabela(Doenca.consultar(edNome.getText(),(short)2));
             lbErro.setText("");
         }
     }
     
     protected void atualizaTabela(ResultSet rs){
         DefaultTableModel modelotabela = (DefaultTableModel) tabela.getModel();
-        modelotabela.setColumnCount(4);
+        modelotabela.setColumnCount(2);
         modelotabela.setRowCount(0);
-
-        tabela.getColumnModel().getColumn(0).setHeaderValue("ID");
-        tabela.getColumnModel().getColumn(1).setHeaderValue("Princípio Ativo");
-        tabela.getColumnModel().getColumn(2).setHeaderValue("Dosagem");
-        tabela.getColumnModel().getColumn(3).setHeaderValue("Contra-Indicação");
+        tabela.getColumnModel().getColumn(0).setWidth(20);
+        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        tabela.getColumnModel().getColumn(0).setHeaderValue("CID");
+        tabela.getColumnModel().getColumn(1).setHeaderValue("Nome");
         
         int linha = 0;
         try{
             if(rs != null) {  
                 while(rs.next()){
                       modelotabela.addRow(new String[modelotabela.getColumnCount()]);
-                      modelotabela.setValueAt(rs.getString("id_medicamento"), linha, 0);
-                      modelotabela.setValueAt(rs.getString("principio_ativo"), linha, 1);
-                      modelotabela.setValueAt(rs.getString("dosagem"), linha, 2);
-                      modelotabela.setValueAt(rs.getString("contra_indicacao"), linha, 3);
+                      modelotabela.setValueAt(rs.getString("cid"), linha, 0);
+                      modelotabela.setValueAt(rs.getString("nome"), linha, 1);
                       linha++;
                   }
             }
@@ -82,22 +86,21 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        edID = new javax.swing.JTextField();
-        edPrincipio_Ativo = new javax.swing.JTextField();
+        edCID = new javax.swing.JTextField();
+        edNome = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
         chSemFiltro = new javax.swing.JCheckBox();
-        chPrincipio_Ativo = new javax.swing.JCheckBox();
-        chID = new javax.swing.JCheckBox();
+        chNome = new javax.swing.JCheckBox();
+        chCID = new javax.swing.JCheckBox();
         btLimpar = new javax.swing.JButton();
-        btInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         lbErro = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
-        btInserir1 = new javax.swing.JButton();
+        btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Busca de Medicamentos");
+        setTitle("Busca de Médicos");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -111,7 +114,7 @@ public class BuscaMedicamento extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Busca Medicamento");
+        jLabel5.setText("Busca de Doença");
         jPanel5.add(jLabel5);
         jLabel5.setBounds(0, 20, 570, 30);
 
@@ -123,15 +126,15 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         jPanel6.add(jLabel6);
         jLabel6.setBounds(40, 10, 140, 20);
 
-        edID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        edID.setEnabled(false);
-        jPanel6.add(edID);
-        edID.setBounds(130, 40, 100, 25);
+        edCID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edCID.setEnabled(false);
+        jPanel6.add(edCID);
+        edCID.setBounds(120, 40, 100, 25);
 
-        edPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        edPrincipio_Ativo.setEnabled(false);
-        jPanel6.add(edPrincipio_Ativo);
-        edPrincipio_Ativo.setBounds(130, 70, 260, 25);
+        edNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        edNome.setEnabled(false);
+        jPanel6.add(edNome);
+        edNome.setBounds(120, 70, 280, 25);
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btBuscar.setText("BUSCAR");
@@ -141,7 +144,7 @@ public class BuscaMedicamento extends javax.swing.JFrame {
             }
         });
         jPanel6.add(btBuscar);
-        btBuscar.setBounds(430, 50, 100, 50);
+        btBuscar.setBounds(420, 60, 100, 50);
 
         buttonGroup1.add(chSemFiltro);
         chSemFiltro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -150,54 +153,42 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         jPanel6.add(chSemFiltro);
         chSemFiltro.setBounds(315, 40, 97, 30);
 
-        buttonGroup1.add(chPrincipio_Ativo);
-        chPrincipio_Ativo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chPrincipio_Ativo.setText("Princípio ativo");
-        chPrincipio_Ativo.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(chNome);
+        chNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chNome.setText("Nome");
+        chNome.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chPrincipio_AtivoItemStateChanged(evt);
+                chNomeItemStateChanged(evt);
             }
         });
-        jPanel6.add(chPrincipio_Ativo);
-        chPrincipio_Ativo.setBounds(10, 70, 120, 24);
+        jPanel6.add(chNome);
+        chNome.setBounds(10, 70, 70, 24);
 
-        buttonGroup1.add(chID);
-        chID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chID.setText("ID");
-        chID.addItemListener(new java.awt.event.ItemListener() {
+        buttonGroup1.add(chCID);
+        chCID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chCID.setText("CID");
+        chCID.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chIDItemStateChanged(evt);
+                chCIDItemStateChanged(evt);
             }
         });
-        jPanel6.add(chID);
-        chID.setBounds(10, 40, 70, 24);
+        jPanel6.add(chCID);
+        chCID.setBounds(10, 40, 70, 24);
 
         btLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btLimpar.setText("Limpar");
         btLimpar.setToolTipText("");
         btLimpar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btLimpar.setOpaque(false);
         btLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btLimparMouseClicked(evt);
             }
         });
         jPanel6.add(btLimpar);
-        btLimpar.setBounds(430, 10, 100, 30);
-
-        btInserir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btInserir.setText("INSERIR");
-        btInserir.setToolTipText("");
-        btInserir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btInserirMouseClicked(evt);
-            }
-        });
-        jPanel6.add(btInserir);
-        btInserir.setBounds(-60, 520, 110, 40);
+        btLimpar.setBounds(420, 20, 100, 30);
 
         jPanel5.add(jPanel6);
-        jPanel6.setBounds(20, 60, 530, 110);
+        jPanel6.setBounds(20, 60, 530, 120);
 
         tabela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -212,14 +203,14 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabela);
 
         jPanel5.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 180, 530, 350);
+        jScrollPane1.setBounds(20, 190, 530, 340);
 
         lbErro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbErro.setForeground(new java.awt.Color(255, 0, 51));
         lbErro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbErro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel5.add(lbErro);
-        lbErro.setBounds(20, 540, 350, 30);
+        lbErro.setBounds(20, 540, 400, 30);
 
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
@@ -231,16 +222,15 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         jPanel5.add(btVoltar);
         btVoltar.setBounds(450, 580, 100, 40);
 
-        btInserir1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btInserir1.setText("INSERIR");
-        btInserir1.setToolTipText("");
-        btInserir1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btSelecionar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btSelecionar.setText("SELECIONAR");
+        btSelecionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btInserir1MouseClicked(evt);
+                btSelecionarMouseClicked(evt);
             }
         });
-        jPanel5.add(btInserir1);
-        btInserir1.setBounds(20, 580, 110, 40);
+        jPanel5.add(btSelecionar);
+        btSelecionar.setBounds(320, 580, 130, 40);
 
         getContentPane().add(jPanel5);
         jPanel5.setBounds(0, 0, 570, 630);
@@ -253,25 +243,20 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_btBuscarMouseClicked
 
-    private void chPrincipio_AtivoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chPrincipio_AtivoItemStateChanged
-        edPrincipio_Ativo.setEnabled(chPrincipio_Ativo.isSelected());
-    }//GEN-LAST:event_chPrincipio_AtivoItemStateChanged
+    private void chNomeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNomeItemStateChanged
+        edNome.setEnabled(chNome.isSelected());
+    }//GEN-LAST:event_chNomeItemStateChanged
 
-    private void chIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chIDItemStateChanged
-        edID.setEnabled(chID.isSelected());
-    }//GEN-LAST:event_chIDItemStateChanged
+    private void chCIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCIDItemStateChanged
+        edCID.setEnabled(chCID.isSelected());
+    }//GEN-LAST:event_chCIDItemStateChanged
  
     private void btLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLimparMouseClicked
-        edID.setText("");
-        edPrincipio_Ativo.setText("");
+        edCID.setText("");
+        edNome.setText("");
         chSemFiltro.setSelected(true);
         btBuscarMouseClicked(evt);
     }//GEN-LAST:event_btLimparMouseClicked
-
-    private void btInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btInserirMouseClicked
-        InsereMedicamento insere = new InsereMedicamento();
-        insere.setVisible(true);
-    }//GEN-LAST:event_btInserirMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         search();
@@ -281,10 +266,19 @@ public class BuscaMedicamento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btVoltarMouseClicked
 
-    private void btInserir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btInserir1MouseClicked
-        InsereMedicamento insere = new InsereMedicamento();
-        insere.setVisible(true);
-    }//GEN-LAST:event_btInserir1MouseClicked
+    private void btSelecionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSelecionarMouseClicked
+        if(tabela.getSelectedRowCount() != 0){
+            String cid = tabela.getValueAt(tabela.getSelectedRow(),0).toString();
+            ArrayList<String> diag = ret.getConsulta().getListaDiagnosticos();
+            diag.add(cid);                    
+            ret.getConsulta().setListaDiagnosticos(diag);                    
+            ret.atualizaTabelaDiagnostico();            
+            this.dispose();  
+        } else {
+            lbErro.setText("Selecione uma doença");
+        }
+
+    }//GEN-LAST:event_btSelecionarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,8 +297,14 @@ public class BuscaMedicamento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscaMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GetDoenca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
@@ -313,7 +313,7 @@ public class BuscaMedicamento extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new BuscaMedicamento().setVisible(true);
+            new GetDoenca().setVisible(true);
         });
     }
     
@@ -321,16 +321,15 @@ public class BuscaMedicamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
-    private javax.swing.JButton btInserir;
-    private javax.swing.JButton btInserir1;
     private javax.swing.JButton btLimpar;
+    private javax.swing.JButton btSelecionar;
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JCheckBox chID;
-    private javax.swing.JCheckBox chPrincipio_Ativo;
+    private javax.swing.JCheckBox chCID;
+    private javax.swing.JCheckBox chNome;
     private javax.swing.JCheckBox chSemFiltro;
-    private javax.swing.JTextField edID;
-    private javax.swing.JTextField edPrincipio_Ativo;
+    private javax.swing.JTextField edCID;
+    private javax.swing.JTextField edNome;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel5;

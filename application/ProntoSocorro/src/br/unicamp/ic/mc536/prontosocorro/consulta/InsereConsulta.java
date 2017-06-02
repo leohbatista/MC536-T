@@ -1,5 +1,7 @@
 package br.unicamp.ic.mc536.prontosocorro.consulta;
 
+import br.unicamp.ic.mc536.prontosocorro.doenca.GetDoenca;
+import br.unicamp.ic.mc536.prontosocorro.medicamento.GetMedicamento;
 import br.unicamp.ic.mc536.prontosocorro.prescricao.Prescricao;
 import java.sql.Date;
 import java.sql.Time;
@@ -24,12 +26,13 @@ public class InsereConsulta extends javax.swing.JFrame {
      * Creates new form CadastroClienteFisica
      */
     
-    boolean flagView;
-    Consulta consulta;
+    private boolean flagView;
+    private Consulta consulta;
     
     public InsereConsulta() {
         initComponents();
         flagView = false;
+        consulta = new Consulta();
         atualizaTabelaDiagnostico();
         atualizaTabelaPrescricao();
     }
@@ -102,6 +105,11 @@ public class InsereConsulta extends javax.swing.JFrame {
         setTitle("Cadastro de Médicos");
         setName("janela"); // NOI18N
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -134,7 +142,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btConfirma);
-        btConfirma.setBounds(410, 730, 120, 40);
+        btConfirma.setBounds(400, 730, 120, 40);
 
         btVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btVoltar.setText("VOLTAR");
@@ -153,12 +161,11 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         lbErro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbErro.setForeground(new java.awt.Color(255, 0, 51));
-        lbErro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbErro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbErro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(lbErro);
         lbErro.setBounds(30, 690, 360, 30);
 
-        edMedico.setEditable(false);
         edMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMedico);
         edMedico.setBounds(100, 80, 140, 25);
@@ -226,7 +233,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Prescrição:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(530, 400, 160, 30);
+        jLabel10.setBounds(310, 370, 160, 30);
 
         btPaciente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btPaciente.setText("Selecionar");
@@ -246,7 +253,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btDelDiagnostico);
-        btDelDiagnostico.setBounds(380, 400, 110, 30);
+        btDelDiagnostico.setBounds(140, 400, 110, 30);
 
         tbPrescricao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -262,7 +269,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tbPrescricao);
 
         jPanel1.add(jScrollPane4);
-        jScrollPane4.setBounds(510, 440, 480, 230);
+        jScrollPane4.setBounds(300, 440, 690, 230);
 
         tbDiagnostico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -278,7 +285,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         jScrollPane5.setViewportView(tbDiagnostico);
 
         jPanel1.add(jScrollPane5);
-        jScrollPane5.setBounds(30, 440, 470, 230);
+        jScrollPane5.setBounds(30, 440, 230, 230);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Sintomas:");
@@ -288,7 +295,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Doenças Diagnosticadas:");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(50, 400, 160, 30);
+        jLabel12.setBounds(40, 370, 160, 30);
 
         btMedico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btMedico.setText("Selecionar");
@@ -308,7 +315,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btAddDiagnostico);
-        btAddDiagnostico.setBounds(270, 400, 110, 30);
+        btAddDiagnostico.setBounds(30, 400, 110, 30);
 
         btAddPrescricao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btAddPrescricao.setText("Adicionar");
@@ -318,7 +325,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btAddPrescricao);
-        btAddPrescricao.setBounds(760, 400, 110, 30);
+        btAddPrescricao.setBounds(310, 400, 110, 30);
 
         btDelPrescrição.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btDelPrescrição.setText("Remover");
@@ -328,7 +335,7 @@ public class InsereConsulta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btDelPrescrição);
-        btDelPrescrição.setBounds(870, 400, 110, 30);
+        btDelPrescrição.setBounds(420, 400, 110, 30);
 
         lbPaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(lbPaciente);
@@ -353,13 +360,11 @@ public class InsereConsulta extends javax.swing.JFrame {
         jPanel1.add(lbMedico);
         lbMedico.setBounds(370, 80, 370, 20);
 
-        edPaciente.setEditable(false);
         try {
-            edPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            edPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        edPaciente.setFocusable(false);
         edPaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edPaciente);
         edPaciente.setBounds(100, 110, 140, 30);
@@ -380,7 +385,7 @@ public class InsereConsulta extends javax.swing.JFrame {
         try {
             int medico = Integer.parseInt(edMedico.getText().trim());
             String paciente = edPaciente.getText().trim();
-            int ano,mes,dia,hora,minuto;
+            int ano,mes,dia,hora,minuto;                        
             
             ano = Integer.parseInt(edAno.getText());
             mes = Integer.parseInt(edMes.getText());
@@ -443,6 +448,8 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btPacienteMouseClicked
 
     private void btDelDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelDiagnosticoMouseClicked
+        int d = tbDiagnostico.getSelectedRow();
+        this.consulta.getListaDiagnosticos().remove(d);
         atualizaTabelaDiagnostico();
     }//GEN-LAST:event_btDelDiagnosticoMouseClicked
 
@@ -451,16 +458,24 @@ public class InsereConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btMedicoMouseClicked
 
     private void btAddDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddDiagnosticoMouseClicked
-        atualizaTabelaDiagnostico();
+        GetDoenca doenca = new GetDoenca(this);
+        doenca.setVisible(true);
     }//GEN-LAST:event_btAddDiagnosticoMouseClicked
 
     private void btAddPrescricaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddPrescricaoMouseClicked
-        atualizaTabelaPrescricao();
+        GetMedicamento med = new GetMedicamento(this);
+        med.setVisible(true);        
     }//GEN-LAST:event_btAddPrescricaoMouseClicked
 
     private void btDelPrescriçãoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDelPrescriçãoMouseClicked
+        int p = tbPrescricao.getSelectedRow();
+        this.consulta.getListaPrescricao().remove(p);
         atualizaTabelaPrescricao();
     }//GEN-LAST:event_btDelPrescriçãoMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        atualizaTabelaPrescricao();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -581,36 +596,34 @@ public class InsereConsulta extends javax.swing.JFrame {
         taObservacoes.setText(consulta.getDiagnostico());
     }
     
-    protected void atualizaTabelaDiagnostico(){
+    public void atualizaTabelaDiagnostico(){
         DefaultTableModel modelotabela = (DefaultTableModel) tbDiagnostico.getModel();
-        modelotabela.setColumnCount(6);
+        modelotabela.setColumnCount(1);
         modelotabela.setRowCount(0);
 
         tbDiagnostico.getColumnModel().getColumn(0).setHeaderValue("CID");
         int linha = 0;
         
         ArrayList<String> diag = consulta.getListaDiagnosticos();
-        
         for (Iterator iterator = diag.iterator(); iterator.hasNext(); linha++) {
             String next = (String) iterator.next();
             modelotabela.addRow(new String[modelotabela.getColumnCount()]);
             modelotabela.setValueAt(next, linha, 0);                     
-        }
-            
+        }                                
     }
     
-    protected void atualizaTabelaPrescricao(){
+    public void atualizaTabelaPrescricao(){
         DefaultTableModel modelotabela = (DefaultTableModel) tbPrescricao.getModel();
-        modelotabela.setColumnCount(6);
+        modelotabela.setColumnCount(3);
         modelotabela.setRowCount(0);
 
         tbPrescricao.getColumnModel().getColumn(0).setHeaderValue("Princípio Ativo");
-        tbPrescricao.getColumnModel().getColumn(0).setHeaderValue("Dosagem");
-        tbPrescricao.getColumnModel().getColumn(0).setHeaderValue("Posologia");
+        tbPrescricao.getColumnModel().getColumn(1).setHeaderValue("Dosagem");
+        tbPrescricao.getColumnModel().getColumn(2).setHeaderValue("Posologia");
         int linha = 0;
         
-        ArrayList<Prescricao> diag = consulta.getListaPrescricao();
-        
+       
+        ArrayList<Prescricao> diag = consulta.getListaPrescricao();        
         for (Iterator iterator = diag.iterator(); iterator.hasNext(); linha++) {
             Prescricao next = (Prescricao) iterator.next();
             modelotabela.addRow(new String[modelotabela.getColumnCount()]);
@@ -618,5 +631,14 @@ public class InsereConsulta extends javax.swing.JFrame {
             modelotabela.setValueAt(next.getMedicamento().getDosagem(), linha, 1);
             modelotabela.setValueAt(next.getPosologia(), linha, 2);            
         }
+       
     }
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }        
 }

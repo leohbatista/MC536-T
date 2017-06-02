@@ -32,8 +32,8 @@ public class Consulta {
     private String diagnostico;
     private String sintomas;
     private String observacoes;
-    private ArrayList<String> listaDiagnosticos; 
-    private ArrayList<Prescricao> listaPrescricao; 
+    private ArrayList<String> listaDiagnosticos = new ArrayList<String>(); 
+    private ArrayList<Prescricao> listaPrescricao = new ArrayList<Prescricao>(); 
    
     private Database d;
 
@@ -50,7 +50,12 @@ public class Consulta {
         d.conecta(); 
     }
 
-
+    public Consulta() {
+        
+    }
+    
+    
+    
     public boolean novo() {               
         String query;        
         boolean flag = false;
@@ -167,8 +172,8 @@ public class Consulta {
         
         query= "SELECT * FROM consulta WHERE medico=" + valor1
                 + " and paciente='" + valor2 + "'"
-                +" and data='" + valor2 + "'"
-                +" and hora='" + valor2 + "'"
+                +" and data='" + valor3 + "'"
+                +" and hora='" + valor4 + "'"
                 + ";";
             
         Database d = new Database();
@@ -263,13 +268,14 @@ public class Consulta {
         ResultSet rs = Prescricao.consultar(""+this.CRM,this.CPF,this.data,this.hora);
         Prescricao p;
         try {
+            
             while(rs.next()) {
                 p = new Prescricao(
                     rs.getInt("medico"),
                     rs.getString("paciente"),
                     rs.getDate("data"),
                     rs.getTime("hora"),
-                    new Medicamento(rs.getInt("medicamento"),rs.getString("nome"),rs.getString("dosagem"),""),
+                    new Medicamento(rs.getInt("medicamento"),rs.getString("principio_ativo"),rs.getString("dosagem"),""),
                     rs.getString("posologia"));
                 listaPrescricao.add(p);
             }

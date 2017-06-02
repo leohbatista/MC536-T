@@ -47,6 +47,7 @@ public class TelaInicial extends javax.swing.JFrame {
         mMedicamento = new javax.swing.JMenu();
         mLaboratorio = new javax.swing.JMenu();
         mDoenca = new javax.swing.JMenu();
+        mTratamento = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -61,9 +62,10 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/unicamp/ic/mc536/prontosocorro/cruz.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(220, 110, 520, 360);
+        jLabel1.setBounds(0, 140, 950, 360);
 
         menu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         menu.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -166,6 +168,18 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menu.add(mDoenca);
 
+        mTratamento.setText("Tratamento");
+        mTratamento.setAutoscrolls(true);
+        mTratamento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mTratamento.setMargin(new java.awt.Insets(5, 5, 5, 10));
+        mTratamento.setName("mMedico"); // NOI18N
+        mTratamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mTratamentoMouseClicked(evt);
+            }
+        });
+        menu.add(mTratamento);
+
         setJMenuBar(menu);
 
         setSize(new java.awt.Dimension(966, 739));
@@ -210,6 +224,10 @@ public class TelaInicial extends javax.swing.JFrame {
         BuscaLaboratorio laboratorio = new BuscaLaboratorio();
         laboratorio.setVisible(true);
     }//GEN-LAST:event_mLaboratorioMouseClicked
+
+    private void mTratamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mTratamentoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mTratamentoMouseClicked
 
 
     /**
@@ -260,6 +278,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu mMedico;
     private javax.swing.JMenu mPaciente;
     private javax.swing.JMenu mSistema;
+    private javax.swing.JMenu mTratamento;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem opFechar;
     // End of variables declaration//GEN-END:variables
