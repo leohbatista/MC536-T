@@ -58,36 +58,42 @@ public class Consulta {
     
     public boolean novo() {               
         String query;        
-        boolean flag = false;
+        
         query = "INSERT INTO consulta (medico, paciente, data, hora, "
                 + "diagnostico, sintomas, observacoes) VALUES ("
                 + this.CRM + ","
                 + "'" + this.CPF + "',"
-                + "'" + this.data + "'"
-                + "'" + this.hora + "',"
+                + "'" + this.data.toString() + "',"
+                + "'" + this.hora.toString() + "',"
                 + "'" + this.diagnostico + "',"
                 + "'" + this.sintomas + "',"
-                + "'" + this.observacoes + "',"
+                + "'" + this.observacoes + "'"
                 + ");";      
         
-        flag = d.insere(query);
+        d.insere(query);
         
-        if (flag) {
-            Diagnostico d;          
-            for (String diag : listaDiagnosticos) {
-                d = new Diagnostico(this.CRM, this.CPF, this.data, this.hora, diag);
-                d.novo();
-            }
-            for (Prescricao presc : listaPrescricao) {
-                presc.setCPF(CPF);
-                presc.setCRM(CRM);
-                presc.setData(data);
-                presc.setHora(hora);
-                presc.novo();
-            }
+        Diagnostico d;          
+        for (String diag : listaDiagnosticos) {
+            d = new Diagnostico(this.CRM, this.CPF, this.data, this.hora, diag);
+            d.novo();
         }
+        listaPrescricao.stream().map((presc) -> {
+            presc.setCPF(CPF);
+            return presc;
+        }).map((presc) -> {
+            presc.setCRM(CRM);
+            return presc;
+        }).map((presc) -> {
+            presc.setData(data);
+            return presc;
+        }).map((presc) -> {
+            presc.setHora(hora);
+            return presc;
+        }).forEachOrdered((presc) -> {
+            presc.novo();
+        });                      
         
-        return flag;
+        return true;
     }
     
     public boolean alterar() {

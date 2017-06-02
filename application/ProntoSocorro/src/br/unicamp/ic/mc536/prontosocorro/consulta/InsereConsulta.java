@@ -132,7 +132,7 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         edMinuto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMinuto);
-        edMinuto.setBounds(880, 110, 40, 25);
+        edMinuto.setBounds(880, 110, 40, 23);
 
         btConfirma.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btConfirma.setText("CONFIRMA");
@@ -168,23 +168,23 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         edMedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMedico);
-        edMedico.setBounds(100, 80, 140, 25);
+        edMedico.setBounds(100, 80, 140, 23);
 
         edDia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edDia);
-        edDia.setBounds(820, 80, 40, 25);
+        edDia.setBounds(820, 80, 40, 23);
 
         edMes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edMes);
-        edMes.setBounds(880, 80, 40, 25);
+        edMes.setBounds(880, 80, 40, 23);
 
         edAno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edAno);
-        edAno.setBounds(940, 80, 50, 25);
+        edAno.setBounds(940, 80, 50, 23);
 
         edHora.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(edHora);
-        edHora.setBounds(820, 110, 40, 25);
+        edHora.setBounds(820, 110, 40, 23);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("* Médico:");
@@ -203,6 +203,7 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         taObservacoes.setColumns(20);
         taObservacoes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        taObservacoes.setLineWrap(true);
         taObservacoes.setRows(5);
         jScrollPane1.setViewportView(taObservacoes);
 
@@ -211,6 +212,7 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         taDiagnostico.setColumns(20);
         taDiagnostico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        taDiagnostico.setLineWrap(true);
         taDiagnostico.setRows(5);
         jScrollPane2.setViewportView(taDiagnostico);
 
@@ -224,6 +226,7 @@ public class InsereConsulta extends javax.swing.JFrame {
 
         taSintomas.setColumns(20);
         taSintomas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        taSintomas.setLineWrap(true);
         taSintomas.setRows(5);
         jScrollPane3.setViewportView(taSintomas);
 
@@ -397,7 +400,7 @@ public class InsereConsulta extends javax.swing.JFrame {
                 lbErro.setText("Selecione um médico");
             } else if (paciente.equals("")) {
                 lbErro.setText("Selecione um paciente");
-            } else if (!Consulta.validaData(ano,mes,dia)) {                   
+            } else if (!Consulta.validaData(dia,mes,ano)) {                   
                 lbErro.setText("Data Inválida");
             } else if (!Consulta.validaHora(hora,minuto) 
                     || edHora.getText().equals("")|| edMinuto.getText().equals("")) {                   
@@ -430,12 +433,13 @@ public class InsereConsulta extends javax.swing.JFrame {
                 }
                 horario += "00";                             
                 
-                Consulta consulta = new Consulta(medico, paciente, Date.valueOf(data), Time.valueOf(horario),
-                        taDiagnostico.getText(), taSintomas.getText(),taObservacoes.getText());                
-                consulta.novo();
+                Consulta c = new Consulta(medico, paciente, Date.valueOf(data), Time.valueOf(horario),
+                        taDiagnostico.getText(), taSintomas.getText(),taObservacoes.getText()); 
+                c.setListaDiagnosticos(consulta.getListaDiagnosticos());
+                c.setListaPrescricao(consulta.getListaPrescricao());
+                c.novo();
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
-                               
-
+                              
                 this.dispose();
             }
         } catch (NumberFormatException e) {
@@ -592,8 +596,8 @@ public class InsereConsulta extends javax.swing.JFrame {
         edMinuto.setText(hora[1]);
         
         taDiagnostico.setText(consulta.getDiagnostico());
-        taSintomas.setText(consulta.getDiagnostico());
-        taObservacoes.setText(consulta.getDiagnostico());
+        taSintomas.setText(consulta.getSintomas());
+        taObservacoes.setText(consulta.getObservacoes());
     }
     
     public void atualizaTabelaDiagnostico(){

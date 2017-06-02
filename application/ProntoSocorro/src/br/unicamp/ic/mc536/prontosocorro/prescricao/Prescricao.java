@@ -41,7 +41,7 @@ public class Prescricao {
     public boolean novo() {               
         String query;        
         query = "INSERT INTO prescricao (medico, paciente, data, hora, medicamento,posologia) VALUES ("
-                + this.CRM + ",'" + this.CPF + "','" + this.data + "','" + this.hora + "','" + this.medicamento.getId_medicamento() +"','" + this.posologia +"');";      
+                + this.CRM + ",'" + this.CPF + "','" + this.data.toString() + "','" + this.hora.toString() + "','" + this.medicamento.getId_medicamento() +"','" + this.posologia +"');";      
         
         return d.insere(query);
     }
