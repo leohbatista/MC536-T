@@ -40,13 +40,9 @@ public class BuscaConsulta extends javax.swing.JFrame {
                 lbErro.setText("O CRM do médico deve ser um valor numérico!");
             }
         } else if(chPaciente.isSelected()) {
-            try {
-                int cpf = Integer.parseInt(edMedico.getText());
-                atualizaTabela(Consulta.consultar(""+cpf,(short)2));
-                lbErro.setText("");
-            } catch (NumberFormatException e) {
-                lbErro.setText("O CPF do paciente deve ser somente os números!");
-            }
+            String cpf = edPaciente.getText();                
+            atualizaTabela(Consulta.consultar(cpf,(short)2));
+            lbErro.setText("");            
         } else if(chData.isSelected()) {
             try {
                 int ano = Integer.parseInt(edAno.getText());
