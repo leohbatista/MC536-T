@@ -59,23 +59,25 @@ public class BuscaExame extends javax.swing.JFrame {
     
     protected void atualizaTabela(ResultSet rs){
         DefaultTableModel modelotabela = (DefaultTableModel) tabela.getModel();
-        modelotabela.setColumnCount(4);
+        modelotabela.setColumnCount(5);
         modelotabela.setRowCount(0);
 
         tabela.getColumnModel().getColumn(0).setHeaderValue("ID");
-        tabela.getColumnModel().getColumn(1).setHeaderValue("Princípio Ativo");
-        tabela.getColumnModel().getColumn(2).setHeaderValue("Dosagem");
-        tabela.getColumnModel().getColumn(3).setHeaderValue("Contra-Indicação");
+        tabela.getColumnModel().getColumn(1).setHeaderValue("CRM");
+        tabela.getColumnModel().getColumn(2).setHeaderValue("CPF");
+        tabela.getColumnModel().getColumn(3).setHeaderValue("Laboratorio");
+        tabela.getColumnModel().getColumn(4).setHeaderValue("Data");
         
         int linha = 0;
         try{
             if(rs != null) {  
                 while(rs.next()){
                       modelotabela.addRow(new String[modelotabela.getColumnCount()]);
-                      modelotabela.setValueAt(rs.getString("id_medicamento"), linha, 0);
-                      modelotabela.setValueAt(rs.getString("principio_ativo"), linha, 1);
-                      modelotabela.setValueAt(rs.getString("dosagem"), linha, 2);
-                      modelotabela.setValueAt(rs.getString("contra_indicacao"), linha, 3);
+                      modelotabela.setValueAt(rs.getString("id_exame"), linha, 0);
+                      modelotabela.setValueAt(rs.getString("medico"), linha, 1);
+                      modelotabela.setValueAt(rs.getString("paciente"), linha, 2);
+                      modelotabela.setValueAt(rs.getString("laboratorio"), linha, 3);
+                      modelotabela.setValueAt(rs.getString("data"), linha, 4);
                       linha++;
                   }
             }
