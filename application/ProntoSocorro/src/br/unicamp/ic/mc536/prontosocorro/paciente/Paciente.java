@@ -48,10 +48,10 @@ public class Paciente {
     public boolean alterar() {
         String query;       
         query = "UPDATE paciente SET "
-                + "cpf='" + this.CPF + "',"
                 + "nome='" + this.nome + "',"
                 + "endereco='" + this.endereco + "',"
-                + "telefone='" + this.telefone + "';";
+                + "telefone='" + this.telefone + "' "
+                + "where cpf='" + this.CPF + "';";
      
         return d.atualiza(query); 
     }  
