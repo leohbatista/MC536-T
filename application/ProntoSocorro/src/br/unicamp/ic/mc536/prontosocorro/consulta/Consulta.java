@@ -135,15 +135,15 @@ public class Consulta {
         switch(flag){
             case 1:     // O filtro é o campo 
                 query= "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "
-                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE medico=" + valor + ";";
+                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE c.medico=" + valor + ";";
                 break;
             case 2:     // O filtro é o campo 
                 query= "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "
-                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE paciente='" + valor + "%';";
+                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE c.paciente='" + valor + "%';";
                 break;
             case 3:     // O filtro é o campo 
                 query= "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "
-                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE data='" + valor + "';";
+                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE c.data='" + valor + "';";
                 break;
             default: 
                 query = "SELECT * FROM consulta;";
@@ -160,12 +160,12 @@ public class Consulta {
         switch(flag){
             case 1:
                 query= "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "
-                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE medico=" + valor1
-                        + " AND paciente='" + valor2 + "';";                
+                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE c.medico=" + valor1
+                        + " AND c.paciente='" + valor2 + "';";                
             case 2:     // O filtro é o campo 
                 query= "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "
-                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE data='" + valor1
-                        + "' AND hora='" + valor2 + "';";
+                + "INNER JOIN medico m ON c.medico=m.CRM AND c.paciente=p.CPF WHERE c.data='" + valor1
+                        + "' AND c.hora='" + valor2 + "';";
                 break;
             default: 
                 query = "SELECT c.*, p.nome as npaciente, m.nome as nmedico FROM consulta c INNER JOIN paciente p "

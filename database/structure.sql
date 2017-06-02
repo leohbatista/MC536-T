@@ -1,6 +1,6 @@
 #create database if not exists pronto_socorro;
 
-##use pronto_socorro;
+use infotecnia01;
 
 CREATE TABLE IF NOT EXISTS medico (
     crm INT NOT NULL,
